@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntegrationTest1._1.Board">
+    <Position X="0.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAYAAAAAAAAAAAAAAAIgCAAAAwAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Objects\Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntegrationTest1._1.Dice" Collapsed="true">
+    <Position X="5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAsAAAACABAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Dice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntegrationTest1._1.Hex" Collapsed="true">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABBAAA=</HashCode>
+      <FileName>Objects\Hex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntegrationTest1._1.Player" Collapsed="true">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAoAAAAAACEACBJQABADEAQAAAEFIBABCACUABAmEBA=</HashCode>
+      <FileName>Objects\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
