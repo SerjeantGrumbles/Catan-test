@@ -399,7 +399,7 @@ namespace IntegrationTest1._1
             Label thisLabel = (Label)sender;
             int i = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
             int j = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
-            // show all the nodes neighboring this hex
+            // hide all the nodes neighboring this hex
             if (i > lblTokens.GetUpperBound(0) / 2)
             {
                 picNodes[(2 * i)][j + 1].Visible = false;
