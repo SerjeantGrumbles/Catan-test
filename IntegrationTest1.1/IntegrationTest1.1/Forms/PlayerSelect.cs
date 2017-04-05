@@ -25,10 +25,10 @@ namespace IntegrationTest1._1
                 return;
             }
             GameScreen gameScreen = new GameScreen();
-            gameScreen.player1 = new Player(txtPlayer1.Text, Color.Red);
-            gameScreen.player2 = new Player(txtPlayer2.Text, Color.Blue);
-            gameScreen.player3 = new Player(txtPlayer3.Text, Color.Black);
-            gameScreen.player4 = new Player(txtPlayer4.Text, Color.DarkOrange);
+            gameScreen.players[0] = new Player(txtPlayer1.Text, Color.Red);
+            gameScreen.players[1] = new Player(txtPlayer2.Text, Color.Blue);
+            gameScreen.players[2] = new Player(txtPlayer3.Text, Color.Black);
+            gameScreen.players[3] = new Player(txtPlayer4.Text, Color.DarkOrange);
             gameScreen.Show();
             this.Hide();
         }

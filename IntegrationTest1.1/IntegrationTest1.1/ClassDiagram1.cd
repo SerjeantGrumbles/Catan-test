@@ -3,7 +3,7 @@
   <Class Name="IntegrationTest1._1.Board">
     <Position X="0.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAYAAAAAAAAAAAAAAAIgCAAAAwAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAgAYAAAAAAAAAAAAAAAIgCAAAAwAAQAAAgAAAAAAA=</HashCode>
       <FileName>Objects\Board.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -14,17 +14,24 @@
       <FileName>Objects\Dice.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IntegrationTest1._1.Hex" Collapsed="true">
+  <Class Name="IntegrationTest1._1.Hex">
     <Position X="3" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="IntegrationTest1._1.Hex.terrainType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Objects\Hex.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABBAAA=</HashCode>
+      <HashCode>ADEIAACIAAAAgAAAAAAAAAAAgAAAABAAAEAAAABBAAA=</HashCode>
       <FileName>Objects\Hex.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IntegrationTest1._1.Player" Collapsed="true">
-    <Position X="3" Y="2" Width="1.5" />
+  <Class Name="IntegrationTest1._1.Player">
+    <Position X="7" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAoAAAAAACEACBJQABADEAQAAAEFIBABCACUABAmEBA=</HashCode>
+      <HashCode>EAoAAAAAACEECBJQABACEIQAAAEFIBABAACUABAmEBA=</HashCode>
       <FileName>Objects\Player.cs</FileName>
     </TypeIdentifier>
   </Class>

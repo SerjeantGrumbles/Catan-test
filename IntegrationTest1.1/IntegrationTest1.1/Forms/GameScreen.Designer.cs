@@ -33,7 +33,7 @@
             this.picDice1 = new System.Windows.Forms.PictureBox();
             this.picDice2 = new System.Windows.Forms.PictureBox();
             this.lblPlayer1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.playerPanel = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.lblPlayer4 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -79,9 +79,10 @@
             this.playerUI_LumberCount = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.lblRoundCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.playerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -144,22 +145,22 @@
             this.lblPlayer1.TabIndex = 19;
             this.lblPlayer1.Text = "(Player)";
             // 
-            // panel1
+            // playerPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.Maroon;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.pictureBox4);
-            this.panel1.Controls.Add(this.lblPlayer4);
-            this.panel1.Controls.Add(this.pictureBox3);
-            this.panel1.Controls.Add(this.lblPlayer3);
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.lblPlayer2);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.lblPlayer1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(253, 109);
-            this.panel1.TabIndex = 20;
+            this.playerPanel.BackColor = System.Drawing.Color.Maroon;
+            this.playerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.playerPanel.Controls.Add(this.pictureBox4);
+            this.playerPanel.Controls.Add(this.lblPlayer4);
+            this.playerPanel.Controls.Add(this.pictureBox3);
+            this.playerPanel.Controls.Add(this.lblPlayer3);
+            this.playerPanel.Controls.Add(this.pictureBox2);
+            this.playerPanel.Controls.Add(this.lblPlayer2);
+            this.playerPanel.Controls.Add(this.pictureBox1);
+            this.playerPanel.Controls.Add(this.lblPlayer1);
+            this.playerPanel.Location = new System.Drawing.Point(12, 12);
+            this.playerPanel.Name = "playerPanel";
+            this.playerPanel.Size = new System.Drawing.Size(253, 109);
+            this.playerPanel.TabIndex = 20;
             // 
             // pictureBox4
             // 
@@ -341,6 +342,7 @@
             // 
             // playerUI_BuildRoad
             // 
+            this.playerUI_BuildRoad.Enabled = false;
             this.playerUI_BuildRoad.ForeColor = System.Drawing.Color.Black;
             this.playerUI_BuildRoad.Location = new System.Drawing.Point(100, 77);
             this.playerUI_BuildRoad.Name = "playerUI_BuildRoad";
@@ -352,6 +354,7 @@
             // 
             // playerUI_BuildCity
             // 
+            this.playerUI_BuildCity.Enabled = false;
             this.playerUI_BuildCity.ForeColor = System.Drawing.Color.Black;
             this.playerUI_BuildCity.Location = new System.Drawing.Point(19, 77);
             this.playerUI_BuildCity.Name = "playerUI_BuildCity";
@@ -374,6 +377,7 @@
             // 
             // playerUI_EndTurn
             // 
+            this.playerUI_EndTurn.Enabled = false;
             this.playerUI_EndTurn.ForeColor = System.Drawing.Color.Black;
             this.playerUI_EndTurn.Location = new System.Drawing.Point(62, 248);
             this.playerUI_EndTurn.Name = "playerUI_EndTurn";
@@ -624,7 +628,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(284, 645);
+            this.btnStart.Location = new System.Drawing.Point(178, 645);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(109, 23);
             this.btnStart.TabIndex = 72;
@@ -641,8 +645,20 @@
             this.btnReset.TabIndex = 73;
             this.btnReset.Text = "Restart Game";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Visible = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // lblRoundCount
+            // 
+            this.lblRoundCount.BackColor = System.Drawing.Color.Maroon;
+            this.lblRoundCount.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRoundCount.Font = new System.Drawing.Font("Copperplate Gothic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoundCount.ForeColor = System.Drawing.Color.Gold;
+            this.lblRoundCount.Location = new System.Drawing.Point(353, 12);
+            this.lblRoundCount.Name = "lblRoundCount";
+            this.lblRoundCount.Size = new System.Drawing.Size(183, 25);
+            this.lblRoundCount.TabIndex = 28;
+            this.lblRoundCount.Text = "(Round)";
+            this.lblRoundCount.Visible = false;
             // 
             // GameScreen
             // 
@@ -650,10 +666,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IntegrationTest1._1.Properties.Resources.Sea;
             this.ClientSize = new System.Drawing.Size(1034, 681);
+            this.Controls.Add(this.lblRoundCount);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.playerUI);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.playerPanel);
             this.Controls.Add(this.picDice2);
             this.Controls.Add(this.picDice1);
             this.Name = "GameScreen";
@@ -662,7 +679,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.playerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -688,7 +705,7 @@
         private System.Windows.Forms.PictureBox picDice1;
         private System.Windows.Forms.PictureBox picDice2;
         private System.Windows.Forms.Label lblPlayer1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel playerPanel;
         private System.Windows.Forms.Label lblPlayer4;
         private System.Windows.Forms.Label lblPlayer3;
         private System.Windows.Forms.Label lblPlayer2;
@@ -701,10 +718,7 @@
         private System.Windows.Forms.Button playerUI_TradeP3;
         private System.Windows.Forms.Button playerUI_TradeP1;
         private System.Windows.Forms.Button playerUI_DevCard;
-        private System.Windows.Forms.Button playerUI_BuildRoad;
         private System.Windows.Forms.Button playerUI_BuildCity;
-        private System.Windows.Forms.Button playerUI_BuildSettlement;
-        private System.Windows.Forms.Button playerUI_EndTurn;
         private System.Windows.Forms.Label lblKnights;
         private System.Windows.Forms.PictureBox picRoadCount;
         private System.Windows.Forms.PictureBox picSettlementCount;
@@ -734,5 +748,9 @@
         public System.Windows.Forms.Label playerUI_Info;
         public System.Windows.Forms.TextBox playerUI_LumberCount;
         private System.Windows.Forms.Button playerUI_TradeP2;
+        public System.Windows.Forms.Button playerUI_BuildRoad;
+        public System.Windows.Forms.Button playerUI_BuildSettlement;
+        public System.Windows.Forms.Button playerUI_EndTurn;
+        private System.Windows.Forms.Label lblRoundCount;
     }
 }

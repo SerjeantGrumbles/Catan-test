@@ -18,7 +18,6 @@ C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\Inte
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.PlayerSelect.resources
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.Properties.Resources.resources
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csproj.GenerateResource.Cache
-C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csprojResolveAssemblyReference.cache
 E:\SDEV265\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe.config
 E:\SDEV265\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe
 E:\SDEV265\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.pdb
@@ -33,3 +32,14 @@ C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\Inte
 C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.Properties.Resources.resources
 C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csproj.GenerateResource.Cache
 C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csprojResolveAssemblyReference.cache
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe.manifest
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.application
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe.manifest
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.application
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.Forms.DiceScreen.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csprojResolveAssemblyReference.cache
+C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe.manifest
+C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.application
+C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.Forms.DiceScreen.resources
+C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe.manifest
+C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.application

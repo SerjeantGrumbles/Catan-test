@@ -14,15 +14,20 @@ namespace IntegrationTest1._1
         private Color colour;
         private int victoryPts = 0;
         private int knights = 0;
-        private int lumberCt = 10, brickCt = 10, grainCt = 10, woolCt = 10, oreCt = 10; //Resources
+        private int lumberCt = 20, brickCt = 20, grainCt = 20, woolCt = 20, oreCt = 20; //Resources
         private int cityCt = 0, settlementCt = 0, roadCt = 0; //Buildings
-        private bool turn = false;
         private bool longestRoad = false, largestArmy = false;
 
         public Player(string nome, Color colore)
         {
             name = nome;
             colour = colore;
+        }
+
+        public Player(Player p)
+        {
+            name = p.Name;
+            colour = p.Colour;
         }
 
         public string Name
@@ -85,11 +90,6 @@ namespace IntegrationTest1._1
             get { return roadCt; }
         }
 
-        public bool MyTurn
-        {
-            get { return turn; }
-        }
-
         public bool LongestRoad
         {
             get { return longestRoad; }
@@ -102,7 +102,6 @@ namespace IntegrationTest1._1
 
         public void StartTurn(GameScreen g)
         {
-            turn = true;
             g.playerUI.Text = Name;
             g.playerUI_Info.Text = Name + " Information";
             g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
@@ -119,13 +118,45 @@ namespace IntegrationTest1._1
             g.playerUI_OreCount.Text = Convert.ToString(OreCount);
         }
 
-        public void EndTurn()
+        public void BuildInitialSettlement(GameScreen g)
         {
-            turn = false;
+            //confirming if this is where you want a building
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a settlement here?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                settlementCt += 1;
+                SetVictoryPoints();
+                MessageBox.Show("Settlement placed!");
+                //Update display
+                g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
+                g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
+                g.playerUI_BuildSettlement.Enabled = false;
+                g.playerUI_BuildRoad.Enabled = true;             
+            }
+        }
+
+        public void BuildInitialRoad(GameScreen g)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a road here?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                roadCt += 1;
+                SetVictoryPoints();
+                MessageBox.Show("Road placed!");
+                g.playerUI_RoadCount.Text = Convert.ToString(RoadCount);
+                g.playerUI_BuildRoad.Enabled = false;
+                g.playerUI_EndTurn.Enabled = true;
+            }
         }
 
         public void BuildSettlement(GameScreen g) //For testing purposes; not the real implementation
         {
+            // can only build a maximum of five settlements
+            if (SettlementCount == 5)
+            {
+                MessageBox.Show("You've reached the maximum number of settlements(5)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // costs 1 each brick, lumber, wool, grain
             if (BrickCount >= 1 && LumberCount >= 1 && WoolCount >= 1 && GrainCount >= 1)
             {
@@ -163,6 +194,12 @@ namespace IntegrationTest1._1
                 MessageBox.Show("Must upgrade from an existing settlement!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            // can only build a maximum of four cities
+            if (CityCount == 4)
+            {
+                MessageBox.Show("You've reached the maximum number of cities(4)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // costs 3 ore, 2 grain
             if (OreCount >= 3 && GrainCount >= 2)
             {
@@ -192,6 +229,12 @@ namespace IntegrationTest1._1
 
         public void BuildRoad(GameScreen g) //For testing purposes; not the real implementation
         {
+            // can only build a maximum of fifteen roads
+            if (RoadCount == 15)
+            {
+                MessageBox.Show("You've reached the maximum number of roads(15)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             // costs 1 brick 1 lumber
             if (BrickCount >= 1 && LumberCount >= 1)
             {

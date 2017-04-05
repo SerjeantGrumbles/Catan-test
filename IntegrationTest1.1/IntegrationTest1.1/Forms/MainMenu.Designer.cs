@@ -39,6 +39,8 @@
             // btnRules
             // 
             this.btnRules.BackColor = System.Drawing.Color.Silver;
+            this.btnRules.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRules.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRules.Font = new System.Drawing.Font("Copperplate Gothic Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRules.Location = new System.Drawing.Point(317, 627);
             this.btnRules.Name = "btnRules";
@@ -51,6 +53,8 @@
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.Silver;
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Copperplate Gothic Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Location = new System.Drawing.Point(525, 627);
             this.btnExit.Name = "btnExit";
@@ -63,6 +67,8 @@
             // btnPlayer
             // 
             this.btnPlayer.BackColor = System.Drawing.Color.Silver;
+            this.btnPlayer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPlayer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPlayer.Font = new System.Drawing.Font("Copperplate Gothic Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPlayer.Location = new System.Drawing.Point(30, 627);
             this.btnPlayer.Name = "btnPlayer";
