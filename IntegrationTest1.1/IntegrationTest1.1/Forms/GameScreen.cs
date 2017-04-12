@@ -28,7 +28,7 @@ namespace IntegrationTest1._1
         new PictureBox[] { null, null, null}};
         private Dice dice = new Dice();
         public Player[] players = new Player[4];
-        private int round = 3;  //start from round 3 for testing purposes
+        private int round = 1;  //start from round 3 for testing purposes
         private int turn = 0;
         public GameScreen()
         {
@@ -115,7 +115,7 @@ namespace IntegrationTest1._1
                 for (int j = 0; j <= picNodes[i].GetUpperBound(0); j++)
                 {
                     picNodes[i][j] = new PictureBox();
-                    picNodes[i][j].BackColor = System.Drawing.Color.Red;
+                    //picNodes[i][j].BackColor = System.Drawing.Color.Red;
                     picNodes[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
                     picNodes[i][j].Location = new System.Drawing.Point((int)gameBoard.Nodes[i][j].LocationX, 
                         (int)gameBoard.Nodes[i][j].LocationY);
@@ -412,6 +412,7 @@ namespace IntegrationTest1._1
                         }
                         catch (IndexOutOfRangeException) { }
                         picNodes[i][j].Visible = true;
+                        picNodes[i][j].BackColor = players[turn].Colour;
                         picNodes[i][j].Click += new EventHandler(SelectSettlement_Click);
                     }
                 }
