@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntegrationTest1._1.Forms
+namespace IntegrationTest1._1
 {
-    class Node
+    public class Node
     {
         private float locX, locY;
-        public Settlement Settlement = null;
+        public Settlement Town = null;
 
         public Node(float x, float y)
         {

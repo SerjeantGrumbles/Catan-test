@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="IntegrationTest1.1.exe" size="5521344">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="IntegrationTest1.1.exe" size="5446592">
       <assemblyIdentity name="IntegrationTest1.1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Cilgmgo0o4Ys545C1Ceh6x5ZSIuWtk8XdtvwkoR/BYI=</dsig:DigestValue>
+        <dsig:DigestValue>+2qVZJ5arFQzGc6n6xeYrqpIbMEideKpEW7PwDvaI4I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

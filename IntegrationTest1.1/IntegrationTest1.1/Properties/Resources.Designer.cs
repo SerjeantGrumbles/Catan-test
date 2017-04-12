@@ -63,6 +63,46 @@ namespace IntegrationTest1._1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BlackCity {
+            get {
+                object obj = ResourceManager.GetObject("BlackCity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BlackSettlement {
+            get {
+                object obj = ResourceManager.GetObject("BlackSettlement", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BlueCity {
+            get {
+                object obj = ResourceManager.GetObject("BlueCity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BlueSettlement {
+            get {
+                object obj = ResourceManager.GetObject("BlueSettlement", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap brick {
             get {
                 object obj = ResourceManager.GetObject("brick", resourceCulture);
@@ -96,6 +136,26 @@ namespace IntegrationTest1._1.Properties {
         internal static System.Drawing.Bitmap cityIcon {
             get {
                 object obj = ResourceManager.GetObject("cityIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DarkOrangeCity {
+            get {
+                object obj = ResourceManager.GetObject("DarkOrangeCity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DarkOrangeSettlement {
+            get {
+                object obj = ResourceManager.GetObject("DarkOrangeSettlement", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -286,6 +346,26 @@ namespace IntegrationTest1._1.Properties {
         internal static System.Drawing.Bitmap Pasture {
             get {
                 object obj = ResourceManager.GetObject("Pasture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedCity {
+            get {
+                object obj = ResourceManager.GetObject("RedCity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedSettlement {
+            get {
+                object obj = ResourceManager.GetObject("RedSettlement", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -80,6 +80,7 @@
     <Compile Include="Forms\DiceScreen.Designer.cs">
       <DependentUpon>DiceScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\City.cs" />
     <Compile Include="Objects\Settlement.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="Objects\Board.cs" />
@@ -238,6 +239,30 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackSettlement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlueSettlement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DarkOrangeSettlement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedSettlement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlackCity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlueCity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DarkOrangeCity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedCity.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

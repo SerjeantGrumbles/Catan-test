@@ -4,16 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using IntegrationTest1._1.Properties;
 
-namespace IntegrationTest1._1.Forms
+namespace IntegrationTest1._1
 {
-    class Settlement
+    public class Settlement
     {
-        private int playerNum;
-        private Color colour;
+        protected int playerNum;
+        protected Color colour;
+
+        public Settlement()
+        {
+
+        }
 
         public Settlement(int num, Color colore)
         {
+            playerNum = num;
             colour = colore;
         }
 
@@ -27,9 +34,21 @@ namespace IntegrationTest1._1.Forms
             get { return colour; }
         }
 
-        public virtual int GetResource()
+        public virtual int ResourceYield()
         {
             return 1;
+        }
+
+        public virtual Image Image
+        {
+            get
+            {
+                string strColour = Colour.ToString();
+                strColour = strColour.Substring(7, strColour.Length - 8);
+                Object O = Resources.ResourceManager.GetObject(strColour + "Settlement");
+                Image image = (Image)O;
+                return image;
+            }
         }
     }
 }

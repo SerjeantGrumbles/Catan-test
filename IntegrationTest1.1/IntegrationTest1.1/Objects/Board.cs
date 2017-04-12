@@ -27,6 +27,8 @@ namespace IntegrationTest1._1
         new Node[] { null, null, null}};
         private int[] tokenValues = {10, 2, 9, 12, 6, 4, 10, 9, 11, 3, 8, 8, 3, 4, 5, 5, 6, 11 };
         private static Random RNG = new Random();
+        private const float X_START_POINT = 200;
+        private const float Y_START_POINT = 200;
 
         public Board()
         {
@@ -120,8 +122,8 @@ namespace IntegrationTest1._1
             int num = 0;
             int k = 0;
             // midpoints of the hexagon
-            float x_0 = 200;
-            float y_0 = 200;
+            float x_0 = X_START_POINT;
+            float y_0 = Y_START_POINT;
 
             float width = (float)Math.Sqrt(3) * Hex.Radius;
             float totalWidth = 0; //accumulated width for each row of hexes
@@ -159,8 +161,8 @@ namespace IntegrationTest1._1
         private void InitializeNodes()
         {
             // midpoints of the hexagon
-            float x_0 = 195;
-            float y_0 = 145;
+            float x_0 = X_START_POINT - 5;
+            float y_0 = Y_START_POINT - 5 - Hex.Radius;
 
             float width = (float)Math.Sqrt(3) * Hex.Radius;
             float totalWidth = 0; //accumulated width for each row of nodes

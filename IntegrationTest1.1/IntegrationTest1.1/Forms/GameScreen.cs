@@ -28,7 +28,7 @@ namespace IntegrationTest1._1
         new PictureBox[] { null, null, null}};
         private Dice dice = new Dice();
         public Player[] players = new Player[4];
-        private int round = 1;
+        private int round = 3;  //start from round 3 for testing purposes
         private int turn = 0;
         public GameScreen()
         {
@@ -99,9 +99,9 @@ namespace IntegrationTest1._1
                     }                   
                     lblTokens[i][j].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                     lblTokens[i][j].Text = gameBoard.GetToken(i, j);
-                    lblTokens[i][j].Click += new System.EventHandler(lblTokens_Click);
-                    lblTokens[i][j].MouseHover += new System.EventHandler(lblTokens_MouseHover);
-                    lblTokens[i][j].MouseLeave += new System.EventHandler(lblTokens_MouseLeave);
+                    lblTokens[i][j].Click += new EventHandler(lblTokens_Click);
+                    //lblTokens[i][j].MouseHover += new System.EventHandler(lblTokens_MouseHover);
+                    //lblTokens[i][j].MouseLeave += new System.EventHandler(lblTokens_MouseLeave);
                     Controls.Add(lblTokens[i][j]);
 
                 }
@@ -123,7 +123,7 @@ namespace IntegrationTest1._1
                     picNodes[i][j].Size = new System.Drawing.Size(10, 10);
                     picNodes[i][j].TabStop = false;
                     picNodes[i][j].Visible = false;
-                    picNodes[i][j].Click += new System.EventHandler(picNode_Click);
+                    //picNodes[i][j].Click += new System.EventHandler(picNode_Click);
                     Controls.Add(picNodes[i][j]);
                 }
             }
@@ -187,6 +187,8 @@ namespace IntegrationTest1._1
                 players[0].Name));
             lblRoundCount.Visible = true;
             lblRoundCount.Text = "Round 1";
+            // For testing purposes, Build City button enabled from the start
+            playerUI_BuildCity.Enabled = true;
         }
 
         private void playerUI_EndTurn_Click(object sender, EventArgs e)
@@ -279,18 +281,196 @@ namespace IntegrationTest1._1
 
         private void playerUI_BuildSettlement_Click(object sender, EventArgs e)
         {
-            if (round < 3)
+            if (round > 2)
             {
-                players[turn].BuildInitialSettlement(this);
-            } else
+                // can only build a maximum of five settlements
+                if (players[turn].SettlementCount == 5)
+                {
+                    MessageBox.Show("You've reached the maximum number of settlements(5)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // costs 1 each brick, lumber, wool, grain
+                if (players[turn].BrickCount < 1 || players[turn].LumberCount < 1 ||
+                        players[turn].WoolCount < 1 || players[turn].GrainCount < 1)
+                {
+                    MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            btnRoll.Enabled = false;
+            playerUI_BuildCity.Enabled = false;
+            playerUI_BuildRoad.Enabled = false;
+            playerUI_DevCard.Enabled = false;
+            playerUI_TradeP1.Enabled = false;
+            playerUI_TradeP2.Enabled = false;
+            playerUI_TradeP3.Enabled = false;
+            playerUI_TradeP4.Enabled = false;
+            playerUI_EndTurn.Enabled = false;
+            playerUI_BuildSettlement.Text = "Cancel";
+            playerUI_BuildSettlement.Click -= playerUI_BuildSettlement_Click;
+            playerUI_BuildSettlement.Click += new EventHandler(CancelSettlement_Click);
+            /*for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
             {
-                players[turn].BuildSettlement(this);
-            }           
-        }
+                for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
+                {
+                    if (gameBoard.Hexes[i][j].Terrain != Hex.terrainType.Desert)
+                    {
+                        if (i > gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i)][j + 1].Town == null)
+                        {
+                                picNodes[(2 * i)][j + 1].Visible = true;
+                                picNodes[(2 * i)][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        else if (gameBoard.Nodes[(2 * i)][j].Town == null)
+                        {
+                            picNodes[(2 * i)][j].Visible = true;
+                            picNodes[(2 * i)][j].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        if (i >= gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i) + 3][j].Town == null)
+                        {
+                            picNodes[(2 * i) + 3][j].Visible = true;
+                            picNodes[(2 * i) + 3][j].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        else if (gameBoard.Nodes[(2 * i) + 3][j + 1].Town == null)
+                        {
+                            picNodes[(2 * i) + 3][j + 1].Visible = true;
+                            picNodes[(2 * i) + 3][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        if (gameBoard.Nodes[(2 * i) + 1][j].Town == null)
+                        {
+                            picNodes[(2 * i) + 1][j].Visible = true;
+                            picNodes[(2 * i) + 1][j].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        if (gameBoard.Nodes[(2 * i) + 1][j + 1].Town == null)
+                        {
+                            picNodes[(2 * i) + 1][j + 1].Visible = true;
+                            picNodes[(2 * i) + 1][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        if (gameBoard.Nodes[(2 * i) + 2][j].Town == null)
+                        {
+                            picNodes[(2 * i) + 2][j].Visible = true;
+                            picNodes[(2 * i) + 2][j].Click += new System.EventHandler(SelectSettlement_Click);
+                        }
+                        if (gameBoard.Nodes[(2 * i) + 2][j + 1].Town == null)
+                        {
+                            picNodes[(2 * i) + 2][j + 1].Visible = true;
+                            picNodes[(2 * i) + 2][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
+                        }                        
+                    }
+                }
+            }*/
+            for (int i = 0; i <= gameBoard.Nodes.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= gameBoard.Nodes[i].GetUpperBound(0); j++)
+                {
+                   if (gameBoard.Nodes[i][j] != null && gameBoard.Nodes[i][j].Town == null)
+                    {
+                        try
+                        {
+                            if (gameBoard.Nodes[i + 1][j].Town != null || 
+                                gameBoard.Nodes[i - 1][j].Town != null)
+                            {
+                                continue;
+                            }
+                        }
+                        catch (IndexOutOfRangeException) { }
+                        try
+                        {
+                            if (i % 2 == 1) //Odd row
+                            {
+                                if (i < gameBoard.Nodes.Length / 2) //Before halfway point
+                                {
+                                    if (gameBoard.Nodes[i - 1][j - 1].Town != null)
+                                    {
+                                        continue;
+                                    }
+                                }
+                                else //After halfway point
+                                {
+                                    if (gameBoard.Nodes[i - 1][j + 1].Town != null)
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                            else //Even row
+                            {
+                                if (i < gameBoard.Nodes.Length / 2) //Before halfway point
+                                {
+                                    if (gameBoard.Nodes[i + 1][j + 1].Town != null)
+                                    {
+                                        continue;
+                                    }
+                                }
+                                else //After halfway point
+                                {
+                                    if (gameBoard.Nodes[i + 1][j - 1].Town != null)
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        catch (IndexOutOfRangeException) { }
+                        picNodes[i][j].Visible = true;
+                        picNodes[i][j].Click += new EventHandler(SelectSettlement_Click);
+                    }
+                }
+            }
+        } // end playerUI_BuildSettlement_Click
 
         private void playerUI_BuildCity_Click(object sender, EventArgs e)
         {
-                players[turn].BuildCity(this);
+            // must upgrade from a settlement
+            if (players[turn].SettlementCount == 0)
+            {
+                MessageBox.Show("Must upgrade from an existing settlement!", "No", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // can only build a maximum of four cities
+            if (players[turn].CityCount == 4)
+            {
+                MessageBox.Show("You've reached the maximum number of cities(4)", "No", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // costs 3 ore, 2 grain
+            if (players[turn].OreCount < 3 || players[turn].GrainCount < 2)
+            {
+                MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
+                return;
+                // players[turn].BuildCity(this);
+            }
+            btnRoll.Enabled = false;
+            playerUI_BuildSettlement.Enabled = false;
+            playerUI_BuildRoad.Enabled = false;
+            playerUI_DevCard.Enabled = false;
+            playerUI_TradeP1.Enabled = false;
+            playerUI_TradeP2.Enabled = false;
+            playerUI_TradeP3.Enabled = false;
+            playerUI_TradeP4.Enabled = false;
+            playerUI_EndTurn.Enabled = false;
+            playerUI_BuildCity.Text = "Cancel";
+            playerUI_BuildCity.Click -= playerUI_BuildCity_Click;
+            playerUI_BuildCity.Click += new EventHandler(CancelCity_Click);
+            for (int i = 0; i <= gameBoard.Nodes.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= gameBoard.Nodes[i].GetUpperBound(0); j++)
+                {
+                    if (gameBoard.Nodes[i][j].Town != null)
+                    {
+                        if (gameBoard.Nodes[i][j].Town.PlayerNum == turn &&
+                        !(gameBoard.Nodes[i][j].Town is City))
+                        {
+                            picNodes[i][j].Enabled = true;
+                            picNodes[i][j].Click += new EventHandler(SelectCity_Click);
+                            picNodes[i][j].Cursor = Cursors.Hand;
+                        }
+                    }
+                    
+                }
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -312,6 +492,9 @@ namespace IntegrationTest1._1
             picDice2.Visible = false;
             lblRoundCount.Visible = false;
             btnStart.Visible = true;
+            playerUI_BuildSettlement.Enabled = true;
+            playerUI_BuildRoad.Enabled = false;
+            playerUI_EndTurn.Enabled = false;
         }
 
         private void playerUI_BuildRoad_Click(object sender, EventArgs e)
@@ -325,7 +508,143 @@ namespace IntegrationTest1._1
             }            
         }
 
-        
+        private void CancelSettlement_Click(object sender, EventArgs e)
+        {
+            HideNodes();
+            btnRoll.Enabled = true;           
+            playerUI_TradeP1.Enabled = true;
+            playerUI_TradeP2.Enabled = true;
+            playerUI_TradeP3.Enabled = true;
+            playerUI_TradeP4.Enabled = true;
+            if (round > 2)
+            {
+                playerUI_BuildCity.Enabled = true;
+                playerUI_DevCard.Enabled = true;
+                playerUI_BuildRoad.Enabled = true;
+                playerUI_EndTurn.Enabled = true;
+            }            
+            playerUI_BuildSettlement.Text = "Build Settlement";
+            playerUI_BuildSettlement.Click -= CancelSettlement_Click;
+            playerUI_BuildSettlement.Click += new EventHandler(playerUI_BuildSettlement_Click);
+        }
+
+        private void CancelRoad_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CancelCity_Click(object sender, EventArgs e)
+        {
+            HideNodes();
+            btnRoll.Enabled = true;
+            playerUI_TradeP1.Enabled = true;
+            playerUI_TradeP2.Enabled = true;
+            playerUI_TradeP3.Enabled = true;
+            playerUI_TradeP4.Enabled = true;
+            playerUI_BuildSettlement.Enabled = true;
+            playerUI_DevCard.Enabled = true;
+            playerUI_BuildRoad.Enabled = true;
+            playerUI_EndTurn.Enabled = true;
+            playerUI_BuildCity.Text = "Build City";
+            playerUI_BuildCity.Click -= CancelCity_Click;
+            playerUI_BuildCity.Click += new EventHandler(playerUI_BuildCity_Click);
+        }
+
+        private void SelectSettlement_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a settlement here?", 
+                "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (round > 2)
+                {
+                    players[turn].BuildSettlement(this);
+                }
+                else
+                {
+                    players[turn].BuildInitialSettlement(this);
+                }
+                int i;
+                int j;
+                PictureBox thisNode = (PictureBox)sender;
+                if (thisNode.Name.Length == 7)
+                {
+                    i = Convert.ToInt32(thisNode.Name.Substring(4, 1));
+                    j = Convert.ToInt32(thisNode.Name.Substring(6, 1));
+                }
+                else
+                {
+                    i = Convert.ToInt32(thisNode.Name.Substring(4, 2));
+                    j = Convert.ToInt32(thisNode.Name.Substring(7, 1));
+                }
+                
+                gameBoard.Nodes[i][j].Town = new Settlement(turn, players[turn].Colour);
+                thisNode.Image = gameBoard.Nodes[i][j].Town.Image;
+                thisNode.Click -= new EventHandler(SelectSettlement_Click);
+                thisNode.Size = new System.Drawing.Size(16, 16);
+                thisNode.Cursor = Cursors.Arrow;
+                thisNode.Enabled = false;
+                HideNodes();
+                btnRoll.Enabled = true;
+                playerUI_TradeP1.Enabled = true;
+                playerUI_TradeP2.Enabled = true;
+                playerUI_TradeP3.Enabled = true;
+                playerUI_TradeP4.Enabled = true;
+                if (round > 2)
+                {
+                    playerUI_BuildCity.Enabled = true;
+                    playerUI_DevCard.Enabled = true;
+                    playerUI_BuildRoad.Enabled = true;
+                    playerUI_EndTurn.Enabled = true;
+                }
+                playerUI_BuildSettlement.Text = "Build Settlement";
+                playerUI_BuildSettlement.Click -= CancelSettlement_Click;
+                playerUI_BuildSettlement.Click += new EventHandler(playerUI_BuildSettlement_Click);
+            }
+        }
+
+        private void SelectCity_Click(object sender, EventArgs e)
+        {
+            //confirming if you want to upgrade this settlement
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to upgrade this settlement into a city?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                players[turn].BuildCity(this);
+                int i;
+                int j;
+                PictureBox thisNode = (PictureBox)sender;
+                if (thisNode.Name.Length == 7)
+                {
+                    i = Convert.ToInt32(thisNode.Name.Substring(4, 1));
+                    j = Convert.ToInt32(thisNode.Name.Substring(6, 1));
+                }
+                else
+                {
+                    i = Convert.ToInt32(thisNode.Name.Substring(4, 2));
+                    j = Convert.ToInt32(thisNode.Name.Substring(7, 1));
+                }
+
+                gameBoard.Nodes[i][j].Town = new City(gameBoard.Nodes[i][j].Town);
+                thisNode.Image = gameBoard.Nodes[i][j].Town.Image;
+                thisNode.Click -= SelectCity_Click;
+                thisNode.Size = new Size(22, 22);
+                thisNode.Cursor = Cursors.Arrow;
+                thisNode.Enabled = false;
+                HideNodes();
+                btnRoll.Enabled = true;
+                playerUI_TradeP1.Enabled = true;
+                playerUI_TradeP2.Enabled = true;
+                playerUI_TradeP3.Enabled = true;
+                playerUI_TradeP4.Enabled = true;
+                playerUI_BuildSettlement.Enabled = true;
+                playerUI_DevCard.Enabled = true;
+                playerUI_BuildRoad.Enabled = true;
+                playerUI_EndTurn.Enabled = true;
+                playerUI_BuildCity.Text = "Build City";
+                playerUI_BuildCity.Click -= CancelCity_Click;
+                playerUI_BuildCity.Click += new EventHandler(playerUI_BuildCity_Click);
+            }
+        }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -343,17 +662,17 @@ namespace IntegrationTest1._1
             {
                 MessageBox.Show("You stole fizzy lifting drinks!", "Thief!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
+            for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
             {
-                for (int j = 0; j <= lblTokens[i].GetUpperBound(0); j++)
+                for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
                 {
                     
                     if (gameBoard.Hexes[i][j].Token == dice.DiceTotal)
                     {
-                        lblTokens[i][j].ForeColor = Color.Red;
+                        // DistributeResources(gameBoard.Hexes[i][j]);
                     } else
                     {
-                        lblTokens[i][j].ForeColor = Color.Black;
+                        
                     }
                 }
             }
@@ -425,6 +744,25 @@ namespace IntegrationTest1._1
         private void picNode_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void HideNodes()
+        {
+            for (int i = 0; i <= picNodes.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= picNodes[i].GetUpperBound(0); j++)
+                {                   
+                    if (gameBoard.Nodes[i][j].Town == null)
+                    {
+                        picNodes[i][j].Visible = false;
+                        picNodes[i][j].Click -= SelectSettlement_Click;
+                    } else
+                    {
+                        picNodes[i][j].Cursor = Cursors.Arrow;
+                    }
+                    picNodes[i][j].Click -= SelectCity_Click;
+                }
+            }
         }
     }
 }
