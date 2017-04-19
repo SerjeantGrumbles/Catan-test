@@ -16,9 +16,9 @@ namespace IntegrationTest1._1
             colour = s.Colour;
         }
 
-        public override int ResourceYield()
+        public override int ResourceYield
         {
-            return 2;
+            get { return 2; }
         }
 
         public override Image Image

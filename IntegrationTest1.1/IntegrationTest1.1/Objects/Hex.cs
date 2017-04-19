@@ -8,7 +8,7 @@ using IntegrationTest1._1.Properties;
 
 namespace IntegrationTest1._1
 {
-    class Hex
+    public class Hex
     {
         public enum terrainType { Desert, Forest, Field, Pasture, Mountains, Hills }
 

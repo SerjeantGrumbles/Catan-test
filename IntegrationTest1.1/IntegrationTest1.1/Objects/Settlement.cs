@@ -34,9 +34,9 @@ namespace IntegrationTest1._1
             get { return colour; }
         }
 
-        public virtual int ResourceYield()
+        public virtual int ResourceYield
         {
-            return 1;
+            get { return 1; }
         }
 
         public virtual Image Image

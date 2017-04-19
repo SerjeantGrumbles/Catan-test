@@ -18,6 +18,7 @@ namespace IntegrationTest1._1
         private int lumberCt = 20, brickCt = 20, grainCt = 20, woolCt = 20, oreCt = 20; //Resources
         private int cityCt = 0, settlementCt = 0, roadCt = 0; //Buildings
         private bool longestRoad = false, largestArmy = false;
+        public enum resourceType { Lumber, Grain, Wool, Ore, Brick}
 
         public Player(string nome, Color colore)
         {
@@ -147,19 +148,6 @@ namespace IntegrationTest1._1
 
         public void BuildSettlement(GameScreen g) //For testing purposes; not the real implementation
         {
-            /*// can only build a maximum of five settlements
-            if (SettlementCount == 5)
-            {
-                MessageBox.Show("You've reached the maximum number of settlements(5)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            // costs 1 each brick, lumber, wool, grain
-            if (BrickCount >= 1 && LumberCount >= 1 && WoolCount >= 1 && GrainCount >= 1)
-            {*/
-                //confirming if this is where you want a building
-                /*DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a settlement here?", "Confirmation", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {*/
                     settlementCt += 1;
                     brickCt -= 1;
                     lumberCt -= 1;
@@ -174,31 +162,10 @@ namespace IntegrationTest1._1
                     g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
                     g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
                     g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
-                    
-                /*}               
-            } else
-            {
-                MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
         }
 
         public void BuildCity(GameScreen g) //For testing purposes; not the real implementation
         {
-            /* // must upgrade from a settlement
-            if (settlementCt == 0)
-            {
-                MessageBox.Show("Must upgrade from an existing settlement!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            // can only build a maximum of four cities
-            if (CityCount == 4)
-            {
-                MessageBox.Show("You've reached the maximum number of cities(4)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            // costs 3 ore, 2 grain
-            if (OreCount >= 3 && GrainCount >= 2)
-            { */              
                     cityCt += 1;
                     settlementCt -= 1;
                     oreCt -= 3;
@@ -211,11 +178,6 @@ namespace IntegrationTest1._1
                     g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
                     g.playerUI_OreCount.Text = Convert.ToString(OreCount);
                     g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);               
-            /*}
-            else
-            {
-                MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } */
         }
 
         public void BuildRoad(GameScreen g) //For testing purposes; not the real implementation
@@ -262,11 +224,44 @@ namespace IntegrationTest1._1
             victoryPts = pts + SettlementCount + (2 * CityCount);
         }
 
-        public string ColourToString()
+        public void HarvestResources(Hex h, Settlement s)
         {
-            string strColour = Colour.ToString();
-            strColour = strColour.Substring(7, strColour.Length - 8);
-            return strColour;
+            switch (h.Terrain)
+            {
+                case Hex.terrainType.Field:
+                    grainCt += s.ResourceYield;
+                    break;
+                case Hex.terrainType.Forest:
+                    lumberCt += s.ResourceYield;
+                    break;
+                case Hex.terrainType.Hills:
+                    brickCt += s.ResourceYield;
+                    break;
+                case Hex.terrainType.Mountains:
+                    oreCt += s.ResourceYield;
+                    break;
+                case Hex.terrainType.Pasture:
+                    woolCt += s.ResourceYield;
+                    break;
+            }
+        }
+
+        public void DepleteResources()
+        {
+            int totalResources = BrickCount + GrainCount + LumberCount + OreCount + WoolCount;
+            if (totalResources > 7)
+            {
+                int counter = 1;
+                Random RNG = new Random();
+                while (counter <= totalResources / 2)
+                {
+                    int resourceEnum = RNG.Next(5);
+                    switch (resourceEnum)
+                    {
+
+                    }
+                }
+            }
         }
     }
 }
