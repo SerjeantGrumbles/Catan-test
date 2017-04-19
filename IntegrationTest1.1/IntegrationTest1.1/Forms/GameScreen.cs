@@ -39,7 +39,7 @@ namespace IntegrationTest1._1
         {
             GenerateTokens();
             GenerateNodes();
-            SetGame();
+            InitializePlayerUI();
         }
 
         private void GameScreen_Paint(object Sender, PaintEventArgs e)
@@ -60,7 +60,7 @@ namespace IntegrationTest1._1
 
                         TextureBrush texture = new TextureBrush(hexImages[i][j]);
                         texture.WrapMode = System.Drawing.Drawing2D.WrapMode.Tile;
-                        Graphics formGraphics = this.CreateGraphics();
+                        Graphics formGraphics = this.CreateGraphics();                        
                         Pen pen15 = new Pen(Color.Black, 5);
 
                         formGraphics.DrawPolygon(pen15, gameBoard.Hexes[i][j].Points); //draw the outline of the hex
@@ -92,7 +92,8 @@ namespace IntegrationTest1._1
                     lblTokens[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
                     if (gameBoard.Hexes[i][j].Token == 0)
                     {
-                        lblTokens[i][j].Size = new System.Drawing.Size(0, 0);
+                        lblTokens[i][j].Size = new System.Drawing.Size(32, 32);
+                        lblTokens[i][j].Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
                     } else
                     {
                         lblTokens[i][j].Size = new System.Drawing.Size(30, 25);
@@ -115,7 +116,6 @@ namespace IntegrationTest1._1
                 for (int j = 0; j <= picNodes[i].GetUpperBound(0); j++)
                 {
                     picNodes[i][j] = new PictureBox();
-                    //picNodes[i][j].BackColor = System.Drawing.Color.Red;
                     picNodes[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
                     picNodes[i][j].Location = new System.Drawing.Point((int)gameBoard.Nodes[i][j].LocationX, 
                         (int)gameBoard.Nodes[i][j].LocationY);
@@ -123,7 +123,6 @@ namespace IntegrationTest1._1
                     picNodes[i][j].Size = new System.Drawing.Size(10, 10);
                     picNodes[i][j].TabStop = false;
                     picNodes[i][j].Visible = false;
-                    //picNodes[i][j].Click += new System.EventHandler(picNode_Click);
                     Controls.Add(picNodes[i][j]);
                 }
             }
@@ -140,7 +139,18 @@ namespace IntegrationTest1._1
             }
         }
 
-        private void SetGame()
+        private void EraseNodes()
+        {
+            for (int i = 0; i <= picNodes.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= picNodes[i].GetUpperBound(0); j++)
+                {
+                    picNodes[i][j].Dispose();
+                }
+            }
+        }
+
+        private void InitializePlayerUI()
         {
             lblPlayer1.Text = players[0].Name;
             lblPlayer2.Text = players[1].Name;
@@ -171,14 +181,7 @@ namespace IntegrationTest1._1
 
         public void startGame()
         {
-            lblPlayer1.Text = players[0].Name;
-            lblPlayer2.Text = players[1].Name;
-            lblPlayer3.Text = players[2].Name;
-            lblPlayer4.Text = players[3].Name;
-            lblPlayer1.ForeColor = players[0].Colour;
-            lblPlayer2.ForeColor = players[1].Colour;
-            lblPlayer3.ForeColor = players[2].Colour;
-            lblPlayer4.ForeColor = players[3].Colour;
+            InitializePlayerUI();
             playerUI.Visible = true;
             picDice1.Visible = true;
             picDice2.Visible = true;
@@ -366,8 +369,15 @@ namespace IntegrationTest1._1
                     {
                         try
                         {
-                            if (gameBoard.Nodes[i + 1][j].Town != null || 
-                                gameBoard.Nodes[i - 1][j].Town != null)
+                            if (gameBoard.Nodes[i + 1][j].Town != null)
+                            {
+                                continue;
+                            }
+                        }
+                        catch (IndexOutOfRangeException) { }
+                        try
+                        {
+                            if (gameBoard.Nodes[i - 1][j].Town != null)
                             {
                                 continue;
                             }
@@ -484,7 +494,9 @@ namespace IntegrationTest1._1
             gameBoard = new Board(); //reset board
             EraseTokens();
             GenerateTokens();
-            SetGame();
+            EraseNodes();
+            GenerateNodes();
+            InitializePlayerUI();
             picDice1.Image = (Image)Resources.ResourceManager.GetObject("dice_blank");
             picDice2.Image = (Image)Resources.ResourceManager.GetObject("dice_blank");
             playerUI_DiceResult.Text = "";
@@ -496,6 +508,9 @@ namespace IntegrationTest1._1
             playerUI_BuildSettlement.Enabled = true;
             playerUI_BuildRoad.Enabled = false;
             playerUI_EndTurn.Enabled = false;
+            playerUI_BuildSettlement.Text = "Build Settlement";
+            playerUI_BuildRoad.Text = "Build Road";
+            playerUI_BuildCity.Text = "Build City";
         }
 
         private void playerUI_BuildRoad_Click(object sender, EventArgs e)
@@ -661,22 +676,92 @@ namespace IntegrationTest1._1
             playerUI_DiceResult.Text = Convert.ToString(dice.DiceTotal);
             if (dice.DiceTotal == 7)
             {
-                MessageBox.Show("You stole fizzy lifting drinks!", "Thief!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("You rolled 7!  The thief has been unleashed!", "Dice rolled", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
+            else
             {
-                for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
+                MessageBox.Show(String.Format("You rolled {0}!", dice.DiceTotal), "Dice rolled");
+                for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
                 {
-                    
-                    if (gameBoard.Hexes[i][j].Token == dice.DiceTotal)
+                    for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
                     {
-                        // DistributeResources(gameBoard.Hexes[i][j]);
-                    } else
-                    {
-                        
+
+                        if (gameBoard.Hexes[i][j].Token == dice.DiceTotal)
+                        {
+                            DistributeResources(gameBoard.Hexes[i][j], i, j);
+                        }
                     }
                 }
             }
+            playerUI_BrickCount.Text = Convert.ToString(players[turn].BrickCount);
+            playerUI_GrainCount.Text = Convert.ToString(players[turn].GrainCount);
+            playerUI_LumberCount.Text = Convert.ToString(players[turn].LumberCount);
+            playerUI_OreCount.Text = Convert.ToString(players[turn].OreCount);
+            playerUI_WoolCount.Text = Convert.ToString(players[turn].WoolCount);
+        }
+
+        private void DistributeResources(Hex h, int i, int j)
+        {
+            Settlement currentSettlement;
+            try
+            {
+                if (i > gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i)][j + 1].Town != null)
+                {
+                    currentSettlement = gameBoard.Nodes[(2 * i)][j + 1].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+                else if (gameBoard.Nodes[(2 * i)][j].Town != null)
+                {
+                    currentSettlement = gameBoard.Nodes[(2 * i)][j].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+            } catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (i >= gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i) + 3][j].Town != null)
+                {
+                    currentSettlement = gameBoard.Nodes[(2 * i) + 3][j].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+                else if (gameBoard.Nodes[(2 * i) + 3][j + 1].Town != null)
+                {
+                    currentSettlement = gameBoard.Nodes[(2 * i) + 3][j + 1].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+            } catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 1][j].Town != null)
+                {
+                    currentSettlement = gameBoard.Nodes[(2 * i) + 1][j].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+            } catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 1][j + 1].Town != null)
+                {
+                currentSettlement = gameBoard.Nodes[(2 * i) + 1][j + 1].Town;
+                players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+            } catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 2][j].Town != null)
+                {
+                currentSettlement = gameBoard.Nodes[(2 * i) + 2][j].Town;
+                players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+            } catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 2][j + 1].Town != null)
+                {
+                currentSettlement = gameBoard.Nodes[(2 * i) + 2][j + 1].Town;
+                players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                }
+            } catch (IndexOutOfRangeException) { }
         }
 
         private void lblTokens_Click(object sender, EventArgs e)
@@ -685,7 +770,17 @@ namespace IntegrationTest1._1
             int row = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
             int column = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
             string hexTerrain = Convert.ToString(gameBoard.Hexes[row][column].Terrain);
-            MessageBox.Show(String.Format("Hex {0}, {1} \nTerrain: {2}", row, column, hexTerrain));
+            Player.resourceType resource = (Player.resourceType)gameBoard.Hexes[row][column].Terrain - 1;
+            string strResource;
+            if (hexTerrain == "Desert")
+            {
+                strResource = "(none)";
+            } else
+            {
+                strResource = Convert.ToString(resource);
+            }
+            MessageBox.Show(String.Format("Hex {0}, {1} \nTerrain: {2} \nResource: {3}", 
+                row, column, hexTerrain, strResource));
         }
 
         private void lblTokens_MouseHover(object sender, EventArgs e)

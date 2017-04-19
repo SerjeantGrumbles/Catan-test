@@ -99,7 +99,7 @@
             this.btnRoll.Location = new System.Drawing.Point(20, 19);
             this.btnRoll.Name = "btnRoll";
             this.btnRoll.Size = new System.Drawing.Size(93, 23);
-            this.btnRoll.TabIndex = 10;
+            this.btnRoll.TabIndex = 1;
             this.btnRoll.Text = "Roll Dice";
             this.btnRoll.UseVisualStyleBackColor = true;
             this.btnRoll.Click += new System.EventHandler(this.btnRoll_Click);
@@ -238,7 +238,7 @@
             this.playerUI_TradeP2.Location = new System.Drawing.Point(20, 162);
             this.playerUI_TradeP2.Name = "playerUI_TradeP2";
             this.playerUI_TradeP2.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_TradeP2.TabIndex = 37;
+            this.playerUI_TradeP2.TabIndex = 8;
             this.playerUI_TradeP2.Text = "Trade With Player 2";
             this.playerUI_TradeP2.UseVisualStyleBackColor = true;
             // 
@@ -249,7 +249,7 @@
             this.playerUI_DiceResult.Name = "playerUI_DiceResult";
             this.playerUI_DiceResult.ReadOnly = true;
             this.playerUI_DiceResult.Size = new System.Drawing.Size(43, 20);
-            this.playerUI_DiceResult.TabIndex = 36;
+            this.playerUI_DiceResult.TabIndex = 2;
             // 
             // playerUI_TradeP4
             // 
@@ -257,7 +257,7 @@
             this.playerUI_TradeP4.Location = new System.Drawing.Point(20, 216);
             this.playerUI_TradeP4.Name = "playerUI_TradeP4";
             this.playerUI_TradeP4.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_TradeP4.TabIndex = 35;
+            this.playerUI_TradeP4.TabIndex = 10;
             this.playerUI_TradeP4.Text = "Trade With Player 4";
             this.playerUI_TradeP4.UseVisualStyleBackColor = true;
             // 
@@ -267,7 +267,7 @@
             this.playerUI_TradeP3.Location = new System.Drawing.Point(21, 189);
             this.playerUI_TradeP3.Name = "playerUI_TradeP3";
             this.playerUI_TradeP3.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_TradeP3.TabIndex = 34;
+            this.playerUI_TradeP3.TabIndex = 9;
             this.playerUI_TradeP3.Text = "Trade With Player 3";
             this.playerUI_TradeP3.UseVisualStyleBackColor = true;
             // 
@@ -277,7 +277,7 @@
             this.playerUI_TradeP1.Location = new System.Drawing.Point(20, 135);
             this.playerUI_TradeP1.Name = "playerUI_TradeP1";
             this.playerUI_TradeP1.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_TradeP1.TabIndex = 33;
+            this.playerUI_TradeP1.TabIndex = 7;
             this.playerUI_TradeP1.Text = "Trade With Player 1";
             this.playerUI_TradeP1.UseVisualStyleBackColor = true;
             // 
@@ -287,7 +287,7 @@
             this.playerUI_DevCard.Location = new System.Drawing.Point(20, 106);
             this.playerUI_DevCard.Name = "playerUI_DevCard";
             this.playerUI_DevCard.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_DevCard.TabIndex = 32;
+            this.playerUI_DevCard.TabIndex = 6;
             this.playerUI_DevCard.Text = "Build Development Card";
             this.playerUI_DevCard.UseVisualStyleBackColor = true;
             // 
@@ -298,7 +298,7 @@
             this.playerUI_BuildRoad.Location = new System.Drawing.Point(100, 77);
             this.playerUI_BuildRoad.Name = "playerUI_BuildRoad";
             this.playerUI_BuildRoad.Size = new System.Drawing.Size(83, 23);
-            this.playerUI_BuildRoad.TabIndex = 31;
+            this.playerUI_BuildRoad.TabIndex = 5;
             this.playerUI_BuildRoad.Text = "Build Road";
             this.playerUI_BuildRoad.UseVisualStyleBackColor = true;
             this.playerUI_BuildRoad.Click += new System.EventHandler(this.playerUI_BuildRoad_Click);
@@ -310,7 +310,7 @@
             this.playerUI_BuildCity.Location = new System.Drawing.Point(19, 77);
             this.playerUI_BuildCity.Name = "playerUI_BuildCity";
             this.playerUI_BuildCity.Size = new System.Drawing.Size(75, 23);
-            this.playerUI_BuildCity.TabIndex = 30;
+            this.playerUI_BuildCity.TabIndex = 4;
             this.playerUI_BuildCity.Text = "Build City";
             this.playerUI_BuildCity.UseVisualStyleBackColor = true;
             this.playerUI_BuildCity.Click += new System.EventHandler(this.playerUI_BuildCity_Click);
@@ -321,7 +321,7 @@
             this.playerUI_BuildSettlement.Location = new System.Drawing.Point(20, 48);
             this.playerUI_BuildSettlement.Name = "playerUI_BuildSettlement";
             this.playerUI_BuildSettlement.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_BuildSettlement.TabIndex = 29;
+            this.playerUI_BuildSettlement.TabIndex = 3;
             this.playerUI_BuildSettlement.Text = "Build Settlement";
             this.playerUI_BuildSettlement.UseVisualStyleBackColor = true;
             this.playerUI_BuildSettlement.Click += new System.EventHandler(this.playerUI_BuildSettlement_Click);
@@ -333,7 +333,7 @@
             this.playerUI_EndTurn.Location = new System.Drawing.Point(62, 248);
             this.playerUI_EndTurn.Name = "playerUI_EndTurn";
             this.playerUI_EndTurn.Size = new System.Drawing.Size(75, 23);
-            this.playerUI_EndTurn.TabIndex = 28;
+            this.playerUI_EndTurn.TabIndex = 11;
             this.playerUI_EndTurn.Text = "End Turn";
             this.playerUI_EndTurn.UseVisualStyleBackColor = true;
             this.playerUI_EndTurn.Click += new System.EventHandler(this.playerUI_EndTurn_Click);
@@ -365,7 +365,7 @@
             this.playerUI_KnightCount.Name = "playerUI_KnightCount";
             this.playerUI_KnightCount.ReadOnly = true;
             this.playerUI_KnightCount.Size = new System.Drawing.Size(60, 20);
-            this.playerUI_KnightCount.TabIndex = 24;
+            this.playerUI_KnightCount.TabIndex = 13;
             // 
             // lblKnights
             // 
@@ -393,7 +393,7 @@
             this.playerUI_RoadCount.Name = "playerUI_RoadCount";
             this.playerUI_RoadCount.ReadOnly = true;
             this.playerUI_RoadCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_RoadCount.TabIndex = 21;
+            this.playerUI_RoadCount.TabIndex = 16;
             this.playerUI_RoadCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // picSettlementCount
@@ -413,7 +413,7 @@
             this.playerUI_SettlementCount.Name = "playerUI_SettlementCount";
             this.playerUI_SettlementCount.ReadOnly = true;
             this.playerUI_SettlementCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_SettlementCount.TabIndex = 19;
+            this.playerUI_SettlementCount.TabIndex = 15;
             this.playerUI_SettlementCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // picCityCount
@@ -433,7 +433,7 @@
             this.playerUI_CityCount.Name = "playerUI_CityCount";
             this.playerUI_CityCount.ReadOnly = true;
             this.playerUI_CityCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_CityCount.TabIndex = 17;
+            this.playerUI_CityCount.TabIndex = 14;
             this.playerUI_CityCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
@@ -470,7 +470,7 @@
             this.playerUI_WoolCount.Name = "playerUI_WoolCount";
             this.playerUI_WoolCount.ReadOnly = true;
             this.playerUI_WoolCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_WoolCount.TabIndex = 13;
+            this.playerUI_WoolCount.TabIndex = 21;
             this.playerUI_WoolCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // picOre
@@ -489,7 +489,7 @@
             this.playerUI_OreCount.Name = "playerUI_OreCount";
             this.playerUI_OreCount.ReadOnly = true;
             this.playerUI_OreCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_OreCount.TabIndex = 11;
+            this.playerUI_OreCount.TabIndex = 20;
             this.playerUI_OreCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // picGrain
@@ -508,7 +508,7 @@
             this.playerUI_GrainCount.Name = "playerUI_GrainCount";
             this.playerUI_GrainCount.ReadOnly = true;
             this.playerUI_GrainCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_GrainCount.TabIndex = 9;
+            this.playerUI_GrainCount.TabIndex = 19;
             this.playerUI_GrainCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // picBrick
@@ -527,7 +527,7 @@
             this.playerUI_BrickCount.Name = "playerUI_BrickCount";
             this.playerUI_BrickCount.ReadOnly = true;
             this.playerUI_BrickCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_BrickCount.TabIndex = 7;
+            this.playerUI_BrickCount.TabIndex = 18;
             this.playerUI_BrickCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // picLumber
@@ -547,7 +547,7 @@
             this.playerUI_VPCount.Name = "playerUI_VPCount";
             this.playerUI_VPCount.ReadOnly = true;
             this.playerUI_VPCount.Size = new System.Drawing.Size(61, 20);
-            this.playerUI_VPCount.TabIndex = 5;
+            this.playerUI_VPCount.TabIndex = 12;
             // 
             // lblVP
             // 
@@ -573,7 +573,7 @@
             this.playerUI_LumberCount.Name = "playerUI_LumberCount";
             this.playerUI_LumberCount.ReadOnly = true;
             this.playerUI_LumberCount.Size = new System.Drawing.Size(28, 20);
-            this.playerUI_LumberCount.TabIndex = 2;
+            this.playerUI_LumberCount.TabIndex = 17;
             this.playerUI_LumberCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnStart
@@ -590,7 +590,7 @@
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(293, 646);
+            this.btnReset.Location = new System.Drawing.Point(293, 645);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 23);
             this.btnReset.TabIndex = 73;
