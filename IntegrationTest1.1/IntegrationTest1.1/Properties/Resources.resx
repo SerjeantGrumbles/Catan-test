@@ -121,6 +121,9 @@
   <data name="settlementIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settlementIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BlackCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Hills" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hills.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,8 +139,8 @@
   <data name="largestArmy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\largestArmy.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dice_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dice_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DarkOrangeCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DarkOrangeCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DarkOrangeSettlement" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DarkOrangeSettlement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,6 +181,9 @@
   <data name="Sea" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sea.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dice_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dice_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="oreIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\oreIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -205,25 +211,22 @@
   <data name="grasslandsTile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\grasslandsTile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dice_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dice_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dice_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dice_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="woodIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\woodIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dice_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dice_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BlackCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlackCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RedCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BlueCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BlueCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DarkOrangeCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DarkOrangeCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dice_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dice_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RedCity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RedCity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="thiefIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thiefIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
