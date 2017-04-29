@@ -17,6 +17,7 @@ namespace IntegrationTest1._1
         private PointF[] points = new PointF[6];
         private float midX, midY;
         private static float rad = 60;
+        private bool thief = false;
 
         public Hex(terrainType terra)
         {
@@ -29,6 +30,10 @@ namespace IntegrationTest1._1
             token = num;
             midX = x;
             midY = y;
+            if (Terrain == terrainType.Desert)
+            {
+                thief = true;
+            }
         }
 
         public terrainType Terrain
@@ -82,6 +87,17 @@ namespace IntegrationTest1._1
                 }
                 return points;
             }
+        }
+
+        public bool Thief
+        {
+            get { return thief; }
+        }
+
+        public void MoveThief(Hex destinationHex)
+        {
+            thief = false;
+            destinationHex.thief = true;
         }
     }
 }

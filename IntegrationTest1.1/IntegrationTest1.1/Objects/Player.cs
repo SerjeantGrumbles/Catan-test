@@ -255,12 +255,141 @@ namespace IntegrationTest1._1
                 Random RNG = new Random();
                 while (counter <= totalResources / 2)
                 {
-                    int resourceEnum = RNG.Next(5);
+                    resourceType resourceEnum = (resourceType)RNG.Next(5);
                     switch (resourceEnum)
                     {
-
+                        case resourceType.Lumber:
+                            if (LumberCount > 0)
+                            {
+                                lumberCt -= 1;
+                                counter += 1;
+                            }
+                            break;
+                        case resourceType.Grain:
+                            if (GrainCount > 0)
+                            {
+                                grainCt -= 1;
+                                counter += 1;
+                            }
+                            break;
+                        case resourceType.Wool:
+                            if (WoolCount > 0)
+                            {
+                                woolCt -= 1;
+                                counter += 1;
+                            }
+                            break;
+                        case resourceType.Ore:
+                            if (OreCount > 0)
+                            {
+                                oreCt -= 1;
+                                counter += 1;
+                            }
+                            break;
+                        case resourceType.Brick:
+                            if (BrickCount > 0)
+                            {
+                                brickCt -= 1;
+                                counter += 1;
+                            }
+                            break;
                     }
                 }
+            }
+        }
+
+        public void MakeTrade(GameScreen g, Player recipient, resourceType myResource, int myAmt, 
+            resourceType theirResource, int theirAmt)
+        {
+            // Resource the current player is giving
+            switch (myResource){
+                case resourceType.Lumber:
+                    lumberCt -= myAmt;
+                    g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
+                    break;
+                case resourceType.Grain:                    
+                    grainCt -= myAmt;
+                    g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
+                    break;
+                case resourceType.Wool:                 
+                    woolCt -= myAmt;
+                    g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
+                    break;
+                case resourceType.Ore:                    
+                    oreCt -= myAmt;
+                    g.playerUI_OreCount.Text = Convert.ToString(OreCount);
+                    break;
+                case resourceType.Brick:
+                    brickCt -= myAmt;
+                    g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
+                    break;
+            }
+            // Resource the current player is receiving
+            switch (theirResource)
+            {
+                case resourceType.Lumber:
+                    lumberCt += myAmt;
+                    g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
+                    break;
+                case resourceType.Grain:
+                    grainCt += myAmt;
+                    g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
+                    break;
+                case resourceType.Wool:
+                    woolCt += myAmt;
+                    g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
+                    break;
+                case resourceType.Ore:
+                    oreCt += myAmt;
+                    g.playerUI_OreCount.Text = Convert.ToString(OreCount);
+                    break;
+                case resourceType.Brick:
+                    brickCt += myAmt;
+                    g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
+                    break;
+            }
+            recipient.ReceiveTrade(theirResource, theirAmt, myResource, myAmt);
+        }
+
+        protected void ReceiveTrade(resourceType myResource, int myAmt, resourceType theirResource, int theirAmt)
+        {
+            // Resource the recipient player is giving
+            switch (myResource)
+            {
+                case resourceType.Lumber:
+                    lumberCt -= myAmt;
+                    break;
+                case resourceType.Grain:
+                    grainCt -= myAmt;
+                    break;
+                case resourceType.Wool:
+                    woolCt -= myAmt;
+                    break;
+                case resourceType.Ore:
+                    oreCt -= myAmt;
+                    break;
+                case resourceType.Brick:
+                    brickCt -= myAmt;
+                    break;
+            }
+            // Resource the recipient player is receiving
+            switch (theirResource)
+            {
+                case resourceType.Lumber:
+                    lumberCt += myAmt;
+                    break;
+                case resourceType.Grain:
+                    grainCt += myAmt;
+                    break;
+                case resourceType.Wool:
+                    woolCt += myAmt;
+                    break;
+                case resourceType.Ore:
+                    oreCt += myAmt;
+                    break;
+                case resourceType.Brick:
+                    brickCt += myAmt;
+                    break;
             }
         }
     }
