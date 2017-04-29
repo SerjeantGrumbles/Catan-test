@@ -98,7 +98,7 @@
             // 
             this.btnRoll.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRoll.ForeColor = System.Drawing.Color.Black;
-            this.btnRoll.Location = new System.Drawing.Point(20, 19);
+            this.btnRoll.Location = new System.Drawing.Point(26, 19);
             this.btnRoll.Name = "btnRoll";
             this.btnRoll.Size = new System.Drawing.Size(93, 23);
             this.btnRoll.TabIndex = 1;
@@ -188,6 +188,7 @@
             // playerUI
             // 
             this.playerUI.BackColor = System.Drawing.Color.Maroon;
+            this.playerUI.Controls.Add(this.picBuildCosts);
             this.playerUI.Controls.Add(this.playerUI_TradeP2);
             this.playerUI.Controls.Add(this.playerUI_DiceResult);
             this.playerUI.Controls.Add(this.playerUI_TradeP4);
@@ -226,9 +227,9 @@
             this.playerUI.Controls.Add(this.playerUI_LumberCount);
             this.playerUI.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerUI.ForeColor = System.Drawing.Color.Gold;
-            this.playerUI.Location = new System.Drawing.Point(822, 12);
+            this.playerUI.Location = new System.Drawing.Point(872, 12);
             this.playerUI.Name = "playerUI";
-            this.playerUI.Size = new System.Drawing.Size(200, 656);
+            this.playerUI.Size = new System.Drawing.Size(217, 874);
             this.playerUI.TabIndex = 71;
             this.playerUI.TabStop = false;
             this.playerUI.Text = "(Player)";
@@ -237,7 +238,7 @@
             // playerUI_TradeP2
             // 
             this.playerUI_TradeP2.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_TradeP2.Location = new System.Drawing.Point(20, 162);
+            this.playerUI_TradeP2.Location = new System.Drawing.Point(26, 162);
             this.playerUI_TradeP2.Name = "playerUI_TradeP2";
             this.playerUI_TradeP2.Size = new System.Drawing.Size(163, 23);
             this.playerUI_TradeP2.TabIndex = 8;
@@ -248,7 +249,7 @@
             // playerUI_DiceResult
             // 
             this.playerUI_DiceResult.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_DiceResult.Location = new System.Drawing.Point(122, 19);
+            this.playerUI_DiceResult.Location = new System.Drawing.Point(128, 19);
             this.playerUI_DiceResult.Name = "playerUI_DiceResult";
             this.playerUI_DiceResult.ReadOnly = true;
             this.playerUI_DiceResult.Size = new System.Drawing.Size(43, 20);
@@ -257,7 +258,7 @@
             // playerUI_TradeP4
             // 
             this.playerUI_TradeP4.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_TradeP4.Location = new System.Drawing.Point(20, 216);
+            this.playerUI_TradeP4.Location = new System.Drawing.Point(26, 216);
             this.playerUI_TradeP4.Name = "playerUI_TradeP4";
             this.playerUI_TradeP4.Size = new System.Drawing.Size(163, 23);
             this.playerUI_TradeP4.TabIndex = 10;
@@ -268,7 +269,7 @@
             // playerUI_TradeP3
             // 
             this.playerUI_TradeP3.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_TradeP3.Location = new System.Drawing.Point(21, 189);
+            this.playerUI_TradeP3.Location = new System.Drawing.Point(27, 189);
             this.playerUI_TradeP3.Name = "playerUI_TradeP3";
             this.playerUI_TradeP3.Size = new System.Drawing.Size(163, 23);
             this.playerUI_TradeP3.TabIndex = 9;
@@ -279,7 +280,7 @@
             // playerUI_TradeP1
             // 
             this.playerUI_TradeP1.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_TradeP1.Location = new System.Drawing.Point(20, 135);
+            this.playerUI_TradeP1.Location = new System.Drawing.Point(26, 135);
             this.playerUI_TradeP1.Name = "playerUI_TradeP1";
             this.playerUI_TradeP1.Size = new System.Drawing.Size(163, 23);
             this.playerUI_TradeP1.TabIndex = 7;
@@ -290,7 +291,7 @@
             // playerUI_DevCard
             // 
             this.playerUI_DevCard.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_DevCard.Location = new System.Drawing.Point(20, 106);
+            this.playerUI_DevCard.Location = new System.Drawing.Point(26, 106);
             this.playerUI_DevCard.Name = "playerUI_DevCard";
             this.playerUI_DevCard.Size = new System.Drawing.Size(163, 23);
             this.playerUI_DevCard.TabIndex = 6;
@@ -302,7 +303,7 @@
             // 
             this.playerUI_BuildRoad.Enabled = false;
             this.playerUI_BuildRoad.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_BuildRoad.Location = new System.Drawing.Point(100, 77);
+            this.playerUI_BuildRoad.Location = new System.Drawing.Point(106, 77);
             this.playerUI_BuildRoad.Name = "playerUI_BuildRoad";
             this.playerUI_BuildRoad.Size = new System.Drawing.Size(83, 23);
             this.playerUI_BuildRoad.TabIndex = 5;
@@ -314,7 +315,7 @@
             // 
             this.playerUI_BuildCity.Enabled = false;
             this.playerUI_BuildCity.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_BuildCity.Location = new System.Drawing.Point(19, 77);
+            this.playerUI_BuildCity.Location = new System.Drawing.Point(25, 77);
             this.playerUI_BuildCity.Name = "playerUI_BuildCity";
             this.playerUI_BuildCity.Size = new System.Drawing.Size(75, 23);
             this.playerUI_BuildCity.TabIndex = 4;
@@ -325,7 +326,7 @@
             // playerUI_BuildSettlement
             // 
             this.playerUI_BuildSettlement.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_BuildSettlement.Location = new System.Drawing.Point(20, 48);
+            this.playerUI_BuildSettlement.Location = new System.Drawing.Point(26, 48);
             this.playerUI_BuildSettlement.Name = "playerUI_BuildSettlement";
             this.playerUI_BuildSettlement.Size = new System.Drawing.Size(163, 23);
             this.playerUI_BuildSettlement.TabIndex = 3;
@@ -337,7 +338,7 @@
             // 
             this.playerUI_EndTurn.Enabled = false;
             this.playerUI_EndTurn.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_EndTurn.Location = new System.Drawing.Point(62, 248);
+            this.playerUI_EndTurn.Location = new System.Drawing.Point(68, 248);
             this.playerUI_EndTurn.Name = "playerUI_EndTurn";
             this.playerUI_EndTurn.Size = new System.Drawing.Size(75, 23);
             this.playerUI_EndTurn.TabIndex = 11;
@@ -347,7 +348,7 @@
             // 
             // picLongestRoad
             // 
-            this.picLongestRoad.Location = new System.Drawing.Point(102, 369);
+            this.picLongestRoad.Location = new System.Drawing.Point(116, 369);
             this.picLongestRoad.Name = "picLongestRoad";
             this.picLongestRoad.Size = new System.Drawing.Size(92, 127);
             this.picLongestRoad.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -357,7 +358,7 @@
             // 
             // picLargestArmy
             // 
-            this.picLargestArmy.Location = new System.Drawing.Point(6, 369);
+            this.picLargestArmy.Location = new System.Drawing.Point(12, 369);
             this.picLargestArmy.Name = "picLargestArmy";
             this.picLargestArmy.Size = new System.Drawing.Size(90, 127);
             this.picLargestArmy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -368,7 +369,7 @@
             // playerUI_KnightCount
             // 
             this.playerUI_KnightCount.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_KnightCount.Location = new System.Drawing.Point(124, 343);
+            this.playerUI_KnightCount.Location = new System.Drawing.Point(130, 343);
             this.playerUI_KnightCount.Name = "playerUI_KnightCount";
             this.playerUI_KnightCount.ReadOnly = true;
             this.playerUI_KnightCount.Size = new System.Drawing.Size(60, 20);
@@ -377,7 +378,7 @@
             // lblKnights
             // 
             this.lblKnights.AutoSize = true;
-            this.lblKnights.Location = new System.Drawing.Point(31, 347);
+            this.lblKnights.Location = new System.Drawing.Point(37, 347);
             this.lblKnights.Name = "lblKnights";
             this.lblKnights.Size = new System.Drawing.Size(52, 12);
             this.lblKnights.TabIndex = 23;
@@ -386,7 +387,7 @@
             // picRoadCount
             // 
             this.picRoadCount.Image = global::IntegrationTest1._1.Properties.Resources.roadIcon;
-            this.picRoadCount.Location = new System.Drawing.Point(119, 523);
+            this.picRoadCount.Location = new System.Drawing.Point(128, 523);
             this.picRoadCount.Name = "picRoadCount";
             this.picRoadCount.Size = new System.Drawing.Size(27, 25);
             this.picRoadCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -396,7 +397,7 @@
             // playerUI_RoadCount
             // 
             this.playerUI_RoadCount.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_RoadCount.Location = new System.Drawing.Point(118, 552);
+            this.playerUI_RoadCount.Location = new System.Drawing.Point(127, 552);
             this.playerUI_RoadCount.Name = "playerUI_RoadCount";
             this.playerUI_RoadCount.ReadOnly = true;
             this.playerUI_RoadCount.Size = new System.Drawing.Size(28, 20);
@@ -406,7 +407,7 @@
             // picSettlementCount
             // 
             this.picSettlementCount.Image = global::IntegrationTest1._1.Properties.Resources.settlementIcon;
-            this.picSettlementCount.Location = new System.Drawing.Point(86, 523);
+            this.picSettlementCount.Location = new System.Drawing.Point(95, 523);
             this.picSettlementCount.Name = "picSettlementCount";
             this.picSettlementCount.Size = new System.Drawing.Size(27, 25);
             this.picSettlementCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -416,7 +417,7 @@
             // playerUI_SettlementCount
             // 
             this.playerUI_SettlementCount.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_SettlementCount.Location = new System.Drawing.Point(85, 552);
+            this.playerUI_SettlementCount.Location = new System.Drawing.Point(94, 552);
             this.playerUI_SettlementCount.Name = "playerUI_SettlementCount";
             this.playerUI_SettlementCount.ReadOnly = true;
             this.playerUI_SettlementCount.Size = new System.Drawing.Size(28, 20);
@@ -426,7 +427,7 @@
             // picCityCount
             // 
             this.picCityCount.Image = global::IntegrationTest1._1.Properties.Resources.cityIcon;
-            this.picCityCount.Location = new System.Drawing.Point(53, 523);
+            this.picCityCount.Location = new System.Drawing.Point(62, 523);
             this.picCityCount.Name = "picCityCount";
             this.picCityCount.Size = new System.Drawing.Size(27, 25);
             this.picCityCount.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -436,7 +437,7 @@
             // playerUI_CityCount
             // 
             this.playerUI_CityCount.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_CityCount.Location = new System.Drawing.Point(52, 552);
+            this.playerUI_CityCount.Location = new System.Drawing.Point(61, 552);
             this.playerUI_CityCount.Name = "playerUI_CityCount";
             this.playerUI_CityCount.ReadOnly = true;
             this.playerUI_CityCount.Size = new System.Drawing.Size(28, 20);
@@ -446,7 +447,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 508);
+            this.label6.Location = new System.Drawing.Point(32, 508);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(167, 12);
             this.label6.TabIndex = 16;
@@ -464,7 +465,7 @@
             // picWool
             // 
             this.picWool.Image = global::IntegrationTest1._1.Properties.Resources.sheepIcon;
-            this.picWool.Location = new System.Drawing.Point(152, 600);
+            this.picWool.Location = new System.Drawing.Point(161, 600);
             this.picWool.Name = "picWool";
             this.picWool.Size = new System.Drawing.Size(27, 25);
             this.picWool.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -473,7 +474,7 @@
             // 
             // playerUI_WoolCount
             // 
-            this.playerUI_WoolCount.Location = new System.Drawing.Point(151, 629);
+            this.playerUI_WoolCount.Location = new System.Drawing.Point(160, 629);
             this.playerUI_WoolCount.Name = "playerUI_WoolCount";
             this.playerUI_WoolCount.ReadOnly = true;
             this.playerUI_WoolCount.Size = new System.Drawing.Size(28, 20);
@@ -483,7 +484,7 @@
             // picOre
             // 
             this.picOre.Image = global::IntegrationTest1._1.Properties.Resources.oreIcon;
-            this.picOre.Location = new System.Drawing.Point(119, 600);
+            this.picOre.Location = new System.Drawing.Point(128, 600);
             this.picOre.Name = "picOre";
             this.picOre.Size = new System.Drawing.Size(27, 25);
             this.picOre.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -492,7 +493,7 @@
             // 
             // playerUI_OreCount
             // 
-            this.playerUI_OreCount.Location = new System.Drawing.Point(119, 629);
+            this.playerUI_OreCount.Location = new System.Drawing.Point(128, 629);
             this.playerUI_OreCount.Name = "playerUI_OreCount";
             this.playerUI_OreCount.ReadOnly = true;
             this.playerUI_OreCount.Size = new System.Drawing.Size(28, 20);
@@ -502,7 +503,7 @@
             // picGrain
             // 
             this.picGrain.Image = global::IntegrationTest1._1.Properties.Resources.grainIcon;
-            this.picGrain.Location = new System.Drawing.Point(86, 600);
+            this.picGrain.Location = new System.Drawing.Point(95, 600);
             this.picGrain.Name = "picGrain";
             this.picGrain.Size = new System.Drawing.Size(27, 25);
             this.picGrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -511,7 +512,7 @@
             // 
             // playerUI_GrainCount
             // 
-            this.playerUI_GrainCount.Location = new System.Drawing.Point(85, 629);
+            this.playerUI_GrainCount.Location = new System.Drawing.Point(94, 629);
             this.playerUI_GrainCount.Name = "playerUI_GrainCount";
             this.playerUI_GrainCount.ReadOnly = true;
             this.playerUI_GrainCount.Size = new System.Drawing.Size(28, 20);
@@ -521,7 +522,7 @@
             // picBrick
             // 
             this.picBrick.Image = global::IntegrationTest1._1.Properties.Resources.brickIcon;
-            this.picBrick.Location = new System.Drawing.Point(53, 600);
+            this.picBrick.Location = new System.Drawing.Point(62, 600);
             this.picBrick.Name = "picBrick";
             this.picBrick.Size = new System.Drawing.Size(27, 25);
             this.picBrick.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -530,7 +531,7 @@
             // 
             // playerUI_BrickCount
             // 
-            this.playerUI_BrickCount.Location = new System.Drawing.Point(52, 629);
+            this.playerUI_BrickCount.Location = new System.Drawing.Point(61, 629);
             this.playerUI_BrickCount.Name = "playerUI_BrickCount";
             this.playerUI_BrickCount.ReadOnly = true;
             this.playerUI_BrickCount.Size = new System.Drawing.Size(28, 20);
@@ -540,7 +541,7 @@
             // picLumber
             // 
             this.picLumber.Image = global::IntegrationTest1._1.Properties.Resources.woodIcon;
-            this.picLumber.Location = new System.Drawing.Point(20, 600);
+            this.picLumber.Location = new System.Drawing.Point(29, 600);
             this.picLumber.Name = "picLumber";
             this.picLumber.Size = new System.Drawing.Size(27, 25);
             this.picLumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -550,7 +551,7 @@
             // playerUI_VPCount
             // 
             this.playerUI_VPCount.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_VPCount.Location = new System.Drawing.Point(123, 313);
+            this.playerUI_VPCount.Location = new System.Drawing.Point(129, 313);
             this.playerUI_VPCount.Name = "playerUI_VPCount";
             this.playerUI_VPCount.ReadOnly = true;
             this.playerUI_VPCount.Size = new System.Drawing.Size(61, 20);
@@ -559,7 +560,7 @@
             // lblVP
             // 
             this.lblVP.AutoSize = true;
-            this.lblVP.Location = new System.Drawing.Point(2, 316);
+            this.lblVP.Location = new System.Drawing.Point(8, 316);
             this.lblVP.Name = "lblVP";
             this.lblVP.Size = new System.Drawing.Size(94, 12);
             this.lblVP.TabIndex = 4;
@@ -568,7 +569,7 @@
             // playerUI_Info
             // 
             this.playerUI_Info.AutoSize = true;
-            this.playerUI_Info.Location = new System.Drawing.Point(50, 292);
+            this.playerUI_Info.Location = new System.Drawing.Point(56, 292);
             this.playerUI_Info.Name = "playerUI_Info";
             this.playerUI_Info.Size = new System.Drawing.Size(133, 12);
             this.playerUI_Info.TabIndex = 3;
@@ -576,7 +577,7 @@
             // 
             // playerUI_LumberCount
             // 
-            this.playerUI_LumberCount.Location = new System.Drawing.Point(19, 629);
+            this.playerUI_LumberCount.Location = new System.Drawing.Point(28, 629);
             this.playerUI_LumberCount.Name = "playerUI_LumberCount";
             this.playerUI_LumberCount.ReadOnly = true;
             this.playerUI_LumberCount.Size = new System.Drawing.Size(28, 20);
@@ -586,7 +587,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(178, 645);
+            this.btnStart.Location = new System.Drawing.Point(372, 826);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(109, 23);
             this.btnStart.TabIndex = 72;
@@ -597,7 +598,7 @@
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(293, 645);
+            this.btnReset.Location = new System.Drawing.Point(487, 826);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 23);
             this.btnReset.TabIndex = 73;
@@ -621,21 +622,19 @@
             // picBuildCosts
             // 
             this.picBuildCosts.Image = global::IntegrationTest1._1.Properties.Resources.BuildingCosts;
-            this.picBuildCosts.Location = new System.Drawing.Point(601, 469);
+            this.picBuildCosts.Location = new System.Drawing.Point(6, 668);
             this.picBuildCosts.Name = "picBuildCosts";
-            this.picBuildCosts.Size = new System.Drawing.Size(200, 200);
+            this.picBuildCosts.Size = new System.Drawing.Size(202, 200);
             this.picBuildCosts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBuildCosts.TabIndex = 74;
             this.picBuildCosts.TabStop = false;
-            this.picBuildCosts.Visible = false;
             // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IntegrationTest1._1.Properties.Resources.Sea;
-            this.ClientSize = new System.Drawing.Size(1034, 681);
-            this.Controls.Add(this.picBuildCosts);
+            this.ClientSize = new System.Drawing.Size(1103, 886);
             this.Controls.Add(this.lblRoundCount);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnReset);

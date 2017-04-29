@@ -136,6 +136,7 @@ namespace IntegrationTest1._1
                     picNodes[i][j].Size = new System.Drawing.Size(10, 10);
                     picNodes[i][j].TabStop = false;
                     picNodes[i][j].Visible = false;
+                    picNodes[i][j].SizeMode = PictureBoxSizeMode.StretchImage;
                     Controls.Add(picNodes[i][j]);
                 }
             }
@@ -203,7 +204,6 @@ namespace IntegrationTest1._1
             MessageBox.Show(String.Format("The game has begun.  {0}, build your first settlement and road.",
                 players[0].Name));
             lblRoundCount.Visible = true;
-            picBuildCosts.Visible = true;
             lblRoundCount.Text = "Round 1";
             // For testing purposes, Build City button enabled from the start
             playerUI_BuildCity.Enabled = true;
