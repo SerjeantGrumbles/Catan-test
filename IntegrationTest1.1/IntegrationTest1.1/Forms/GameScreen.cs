@@ -28,8 +28,10 @@ namespace IntegrationTest1._1
         new PictureBox[] { null, null, null}};
         private Dice dice = new Dice();
         public Player[] players = new Player[4];
-        private int round = 1;  //start from round 3 for testing purposes
+        private int round = 3;  //start from round 3 for testing purposes
         private int turn = 0;
+        private int thRow;
+        private int thCol;
         public GameScreen()
         {
             InitializeComponent();
@@ -62,9 +64,18 @@ namespace IntegrationTest1._1
                         texture.WrapMode = System.Drawing.Drawing2D.WrapMode.Tile;
                         Graphics formGraphics = this.CreateGraphics();                        
                         Pen pen15 = new Pen(Color.Black, 5);
+                        
 
                         formGraphics.DrawPolygon(pen15, gameBoard.Hexes[i][j].Points); //draw the outline of the hex
                         formGraphics.FillPolygon(texture, gameBoard.Hexes[i][j].Points); //fill the hex with the terrain texture
+
+                        /*Pen pen16 = new Pen(Color.Red, 8);
+                        float xCoord = 200 + Hex.Radius * (float)Math.Sin(4 * 60 * Math.PI / 180f);
+                        float yCoord = 200 + Hex.Radius * (float)Math.Cos(4 * 60 * Math.PI / 180f);
+                        PointF pointA = new PointF(xCoord, yCoord);
+                        PointF pointB = new PointF(xCoord + ((float)Math.Sqrt(3) * Hex.Radius) / 2, 
+                            yCoord - Hex.Radius / 2);
+                        formGraphics.DrawLine(pen16, pointA, pointB);*/
                         formGraphics.Dispose();
                     }
                     catch (System.IO.FileNotFoundException)
@@ -89,18 +100,20 @@ namespace IntegrationTest1._1
                         (int)gameBoard.Hexes[i][j].MidpointY - 10);
                     lblTokens[i][j].Font = new System.Drawing.Font("Copperplate Gothic Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     lblTokens[i][j].Name = "token" + i + "_" + j;
-                    lblTokens[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
-                    if (gameBoard.Hexes[i][j].Token == 0)
+                    //lblTokens[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
+                    if (gameBoard.Hexes[i][j].Thief)
                     {
                         lblTokens[i][j].Size = new System.Drawing.Size(32, 32);
                         lblTokens[i][j].Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
+                        thRow = i;
+                        thCol = j;
                     } else
                     {
                         lblTokens[i][j].Size = new System.Drawing.Size(30, 25);
                     }                   
                     lblTokens[i][j].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                     lblTokens[i][j].Text = gameBoard.GetToken(i, j);
-                    lblTokens[i][j].Click += new EventHandler(lblTokens_Click);
+                    //lblTokens[i][j].Click += new EventHandler(lblTokens_Click);
                     //lblTokens[i][j].MouseHover += new System.EventHandler(lblTokens_MouseHover);
                     //lblTokens[i][j].MouseLeave += new System.EventHandler(lblTokens_MouseLeave);
                     Controls.Add(lblTokens[i][j]);
@@ -174,6 +187,7 @@ namespace IntegrationTest1._1
         {
             MessageBox.Show("Initialzing game.  Dice rolls will determine player order.");
             Forms.DiceScreen diceScreen = new Forms.DiceScreen();
+
             diceScreen.Show();
             btnStart.Visible = false;
             
@@ -189,6 +203,7 @@ namespace IntegrationTest1._1
             MessageBox.Show(String.Format("The game has begun.  {0}, build your first settlement and road.",
                 players[0].Name));
             lblRoundCount.Visible = true;
+            picBuildCosts.Visible = true;
             lblRoundCount.Text = "Round 1";
             // For testing purposes, Build City button enabled from the start
             playerUI_BuildCity.Enabled = true;
@@ -451,7 +466,6 @@ namespace IntegrationTest1._1
                 MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, 
                     MessageBoxIcon.Error);
                 return;
-                // players[turn].BuildCity(this);
             }
             btnRoll.Enabled = false;
             playerUI_BuildSettlement.Enabled = false;
@@ -508,6 +522,7 @@ namespace IntegrationTest1._1
             playerUI_BuildSettlement.Enabled = true;
             playerUI_BuildRoad.Enabled = false;
             playerUI_EndTurn.Enabled = false;
+            picBuildCosts.Visible = false;
             playerUI_BuildSettlement.Text = "Build Settlement";
             playerUI_BuildRoad.Text = "Build Road";
             playerUI_BuildCity.Text = "Build City";
@@ -678,6 +693,22 @@ namespace IntegrationTest1._1
             {
                 MessageBox.Show("You rolled 7!  The thief has been unleashed!", "Dice rolled", 
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                for (int i = 0; i <= players.GetUpperBound(0); i++)
+                {
+                    players[i].DepleteResources();
+                }
+                for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
+                {
+                    for (int j = 0; j <= lblTokens[i].GetUpperBound(0); j++)
+                    {
+                        if (gameBoard.Hexes[i][j].Thief == false)
+                        {
+                            lblTokens[i][j].Click += new EventHandler(MoveThief_Click);
+                            lblTokens[i][j].Cursor = Cursors.Hand;
+                        }
+                    }
+                }
+                playerUI.Enabled = false;
             }
             else
             {
@@ -687,7 +718,8 @@ namespace IntegrationTest1._1
                     for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
                     {
 
-                        if (gameBoard.Hexes[i][j].Token == dice.DiceTotal)
+                        if (gameBoard.Hexes[i][j].Token == dice.DiceTotal && 
+                            gameBoard.Hexes[i][j].Thief == false)
                         {
                             DistributeResources(gameBoard.Hexes[i][j], i, j);
                         }
@@ -764,7 +796,7 @@ namespace IntegrationTest1._1
             } catch (IndexOutOfRangeException) { }
         }
 
-        private void lblTokens_Click(object sender, EventArgs e)
+        /*private void lblTokens_Click(object sender, EventArgs e)
         {
             Label thisLabel = (Label)sender;
             int row = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
@@ -781,9 +813,54 @@ namespace IntegrationTest1._1
             }
             MessageBox.Show(String.Format("Hex {0}, {1} \nTerrain: {2} \nResource: {3}", 
                 row, column, hexTerrain, strResource));
+        }*/
+
+        private void MoveThief_Click(object sender, EventArgs e)
+        {
+            Label thisLabel = (Label)sender;
+            int row = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
+            int column = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
+            gameBoard.Hexes[thRow][thCol].MoveThief(gameBoard.Hexes[row][column]);
+            
+
+            //restore previous thief token to its normal state
+            if (gameBoard.Hexes[thRow][thCol].Terrain == Hex.terrainType.Desert)
+            {
+                lblTokens[thRow][thCol].Size = new System.Drawing.Size(0, 0);
+            }
+            else
+            {
+                lblTokens[thRow][thCol].Size = new System.Drawing.Size(30, 25);
+                lblTokens[thRow][thCol].Text = gameBoard.GetToken(thRow, thCol);
+            }
+            lblTokens[thRow][thCol].Image = null;
+
+            //change destination token to thief state
+            thisLabel.Size = new System.Drawing.Size(32, 32);
+            thisLabel.Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
+            thisLabel.Text = "";
+            
+
+            //remove event handlers
+            for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= lblTokens[i].GetUpperBound(0); j++)
+                {
+                    if (i != thRow || j != thCol)
+                    {
+                        lblTokens[i][j].Click -= MoveThief_Click;
+                        lblTokens[i][j].Cursor = Cursors.Default;
+                    }
+                }
+            }
+            // update thief token index
+            thRow = row;
+            thCol = column;
+
+            playerUI.Enabled = true;
         }
 
-        private void lblTokens_MouseHover(object sender, EventArgs e)
+        /*private void lblTokens_MouseHover(object sender, EventArgs e)
         {
             Label thisLabel = (Label)sender;
             int i = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
@@ -835,12 +912,7 @@ namespace IntegrationTest1._1
             picNodes[(2 * i) + 1][j + 1].Visible = false;
             picNodes[(2 * i) + 2][j].Visible = false;
             picNodes[(2 * i) + 2][j + 1].Visible = false;
-        }
-
-        private void picNode_Click(object sender, EventArgs e)
-        {
-
-        }
+        }*/
 
         private void HideNodes()
         {
@@ -859,6 +931,59 @@ namespace IntegrationTest1._1
                     picNodes[i][j].Click -= SelectCity_Click;
                 }
             }
+        }
+
+        private void playerUI_TradeP1_Click(object sender, EventArgs e)
+        {
+            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            tradeScreen.current = turn;
+            tradeScreen.recipient = 0;
+            tradeScreen.Show();
+            playerUI.Enabled = false;
+        }
+
+        private void playerUI_TradeP2_Click(object sender, EventArgs e)
+        {
+            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            tradeScreen.current = turn;
+            tradeScreen.recipient = 1;
+            tradeScreen.Show();
+            playerUI.Enabled = false;
+        }
+
+        private void playerUI_TradeP3_Click(object sender, EventArgs e)
+        {
+            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            tradeScreen.current = turn;
+            tradeScreen.recipient = 2;
+            tradeScreen.Show();
+            playerUI.Enabled = false;
+        }
+
+        private void playerUI_TradeP4_Click(object sender, EventArgs e)
+        {
+            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            tradeScreen.current = turn;
+            tradeScreen.recipient = 3;
+            tradeScreen.Show();
+            playerUI.Enabled = false;
+        }
+
+        private void playerUI_DevCard_Click(object sender, EventArgs e)
+        {
+            // cost one each wool, ore, grain
+            if (players[turn].WoolCount < 1 || players[turn].OreCount < 1 || players[turn].GrainCount < 1)
+            {
+                MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /*if ("Dev Cards are gone")
+            {
+                MessageBox.Show("86 Dev Cards!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }*/
+            MessageBox.Show("Dev Card Bought", "Test");
+            //players[turn].BuyDevCard();
         }
     }
 }

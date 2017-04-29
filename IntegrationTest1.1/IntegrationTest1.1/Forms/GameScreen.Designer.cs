@@ -76,6 +76,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.lblRoundCount = new System.Windows.Forms.Label();
+            this.picBuildCosts = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).BeginInit();
             this.playerPanel.SuspendLayout();
@@ -90,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picGrain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBrick)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBuildCosts)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRoll
@@ -241,6 +243,7 @@
             this.playerUI_TradeP2.TabIndex = 8;
             this.playerUI_TradeP2.Text = "Trade With Player 2";
             this.playerUI_TradeP2.UseVisualStyleBackColor = true;
+            this.playerUI_TradeP2.Click += new System.EventHandler(this.playerUI_TradeP2_Click);
             // 
             // playerUI_DiceResult
             // 
@@ -260,6 +263,7 @@
             this.playerUI_TradeP4.TabIndex = 10;
             this.playerUI_TradeP4.Text = "Trade With Player 4";
             this.playerUI_TradeP4.UseVisualStyleBackColor = true;
+            this.playerUI_TradeP4.Click += new System.EventHandler(this.playerUI_TradeP4_Click);
             // 
             // playerUI_TradeP3
             // 
@@ -270,6 +274,7 @@
             this.playerUI_TradeP3.TabIndex = 9;
             this.playerUI_TradeP3.Text = "Trade With Player 3";
             this.playerUI_TradeP3.UseVisualStyleBackColor = true;
+            this.playerUI_TradeP3.Click += new System.EventHandler(this.playerUI_TradeP3_Click);
             // 
             // playerUI_TradeP1
             // 
@@ -280,6 +285,7 @@
             this.playerUI_TradeP1.TabIndex = 7;
             this.playerUI_TradeP1.Text = "Trade With Player 1";
             this.playerUI_TradeP1.UseVisualStyleBackColor = true;
+            this.playerUI_TradeP1.Click += new System.EventHandler(this.playerUI_TradeP1_Click);
             // 
             // playerUI_DevCard
             // 
@@ -288,8 +294,9 @@
             this.playerUI_DevCard.Name = "playerUI_DevCard";
             this.playerUI_DevCard.Size = new System.Drawing.Size(163, 23);
             this.playerUI_DevCard.TabIndex = 6;
-            this.playerUI_DevCard.Text = "Build Development Card";
+            this.playerUI_DevCard.Text = "Buy Development Card";
             this.playerUI_DevCard.UseVisualStyleBackColor = true;
+            this.playerUI_DevCard.Click += new System.EventHandler(this.playerUI_DevCard_Click);
             // 
             // playerUI_BuildRoad
             // 
@@ -611,12 +618,24 @@
             this.lblRoundCount.Text = "(Round)";
             this.lblRoundCount.Visible = false;
             // 
+            // picBuildCosts
+            // 
+            this.picBuildCosts.Image = global::IntegrationTest1._1.Properties.Resources.BuildingCosts;
+            this.picBuildCosts.Location = new System.Drawing.Point(601, 469);
+            this.picBuildCosts.Name = "picBuildCosts";
+            this.picBuildCosts.Size = new System.Drawing.Size(200, 200);
+            this.picBuildCosts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBuildCosts.TabIndex = 74;
+            this.picBuildCosts.TabStop = false;
+            this.picBuildCosts.Visible = false;
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IntegrationTest1._1.Properties.Resources.Sea;
             this.ClientSize = new System.Drawing.Size(1034, 681);
+            this.Controls.Add(this.picBuildCosts);
             this.Controls.Add(this.lblRoundCount);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnReset);
@@ -643,6 +662,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picGrain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBrick)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBuildCosts)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -695,5 +715,6 @@
         public System.Windows.Forms.Button playerUI_BuildSettlement;
         public System.Windows.Forms.Button playerUI_EndTurn;
         private System.Windows.Forms.Label lblRoundCount;
+        private System.Windows.Forms.PictureBox picBuildCosts;
     }
 }
