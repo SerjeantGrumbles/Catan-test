@@ -80,7 +80,15 @@
     <Compile Include="Forms\DiceScreen.Designer.cs">
       <DependentUpon>DiceScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TradeScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TradeScreen.Designer.cs">
+      <DependentUpon>TradeScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Objects\City.cs" />
+    <Compile Include="Objects\Edge.cs" />
+    <Compile Include="Objects\Road.cs" />
     <Compile Include="Objects\Settlement.cs" />
     <Compile Include="Objects\Node.cs" />
     <Compile Include="Objects\Board.cs" />
@@ -118,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlayerSelect.resx">
       <DependentUpon>PlayerSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TradeScreen.resx">
+      <DependentUpon>TradeScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -266,6 +277,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\thiefIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BuildingCosts.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
