@@ -123,6 +123,16 @@ namespace IntegrationTest1._1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BuildingCosts {
+            get {
+                object obj = ResourceManager.GetObject("BuildingCosts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap citiesIcon {
             get {
                 object obj = ResourceManager.GetObject("citiesIcon", resourceCulture);
