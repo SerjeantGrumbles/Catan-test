@@ -16,7 +16,7 @@ namespace IntegrationTest1._1
         private int token;
         private PointF[] points = new PointF[6];
         private float midX, midY;
-        private static float rad = 60;
+        private static float rad = 70;
         private bool thief = false;
 
         public Hex(terrainType terra)
