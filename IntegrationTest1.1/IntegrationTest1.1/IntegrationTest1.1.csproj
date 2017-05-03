@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -74,6 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DevCardScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DevCardScreen.Designer.cs">
+      <DependentUpon>DevCardScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DiceScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,8 @@
       <DependentUpon>TradeScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\City.cs" />
+    <Compile Include="Objects\DevCard.cs" />
+    <Compile Include="Objects\DevCardDeck.cs" />
     <Compile Include="Objects\Edge.cs" />
     <Compile Include="Objects\Road.cs" />
     <Compile Include="Objects\Settlement.cs" />
@@ -115,6 +123,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DevCardScreen.resx">
+      <DependentUpon>DevCardScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DiceScreen.resx">
       <DependentUpon>DiceScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,20 +143,20 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="ClassDiagram1.cd" />
     <None Include="IntegrationTest1.1_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -280,6 +291,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BuildingCosts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YearOfPlenty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Knight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Library.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Market.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Monopoly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Palace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RoadBuild.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\University.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chapel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
