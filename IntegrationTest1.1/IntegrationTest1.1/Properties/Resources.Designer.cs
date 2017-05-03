@@ -133,6 +133,16 @@ namespace IntegrationTest1._1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Chapel {
+            get {
+                object obj = ResourceManager.GetObject("Chapel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap citiesIcon {
             get {
                 object obj = ResourceManager.GetObject("citiesIcon", resourceCulture);
@@ -313,6 +323,16 @@ namespace IntegrationTest1._1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Knight {
+            get {
+                object obj = ResourceManager.GetObject("Knight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap largestArmy {
             get {
                 object obj = ResourceManager.GetObject("largestArmy", resourceCulture);
@@ -323,9 +343,39 @@ namespace IntegrationTest1._1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Library {
+            get {
+                object obj = ResourceManager.GetObject("Library", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap longestRoad {
             get {
                 object obj = ResourceManager.GetObject("longestRoad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Market {
+            get {
+                object obj = ResourceManager.GetObject("Market", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Monopoly {
+            get {
+                object obj = ResourceManager.GetObject("Monopoly", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -346,6 +396,16 @@ namespace IntegrationTest1._1.Properties {
         internal static System.Drawing.Bitmap oreIcon {
             get {
                 object obj = ResourceManager.GetObject("oreIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Palace {
+            get {
+                object obj = ResourceManager.GetObject("Palace", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,6 +436,16 @@ namespace IntegrationTest1._1.Properties {
         internal static System.Drawing.Bitmap RedSettlement {
             get {
                 object obj = ResourceManager.GetObject("RedSettlement", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Roadbuild {
+            get {
+                object obj = ResourceManager.GetObject("Roadbuild", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,9 +503,29 @@ namespace IntegrationTest1._1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap University {
+            get {
+                object obj = ResourceManager.GetObject("University", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap woodIcon {
             get {
                 object obj = ResourceManager.GetObject("woodIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Year {
+            get {
+                object obj = ResourceManager.GetObject("Year", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

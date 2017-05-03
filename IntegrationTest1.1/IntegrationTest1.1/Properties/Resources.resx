@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="University" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\University.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="settlementIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settlementIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,6 +139,9 @@
   <data name="BlueSettlement" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BlueSettlement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Knight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Knight.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="largestArmy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\largestArmy.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,6 +157,9 @@
   <data name="dice_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dice_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Library" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Library.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RedSettlement" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RedSettlement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -159,6 +168,9 @@
   </data>
   <data name="Mountains" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mountains.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Palace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Palace.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dice_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dice_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,6 +196,12 @@
   <data name="Sea" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sea.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Roadbuild" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Roadbuild.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Monopoly" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Monopoly.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="oreIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\oreIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -205,6 +223,9 @@
   <data name="cityIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cityIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BuildingCosts" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BuildingCosts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Field" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Field.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -214,8 +235,14 @@
   <data name="grasslandsTile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\grasslandsTile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Year" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\YearOfPlenty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="dice_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dice_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Market" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Market.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="woodIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\woodIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,7 +256,7 @@
   <data name="dice_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dice_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BuildingCosts" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BuildingCosts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Chapel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Chapel.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
