@@ -9,7 +9,7 @@ using IntegrationTest1._1.Properties;
 
 namespace IntegrationTest1._1
 {
-    class Dice
+    public class Dice
     {
         private int die1 = 1;
         private int die2 = 1;

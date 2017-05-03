@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
-using IntegrationTest1._1.Forms;
+using System.Collections;
+using IntegrationTest1._1;
+using IntegrationTest1._1.Properties;
 
 namespace IntegrationTest1._1
 {
@@ -14,22 +16,29 @@ namespace IntegrationTest1._1
         private string name;
         private Color colour;
         private int victoryPts = 0;
-        private int knights = 0;
-        private int lumberCt = 20, brickCt = 20, grainCt = 20, woolCt = 20, oreCt = 20; //Resources
+        private int knightCt = 0;
+        private int lumberCt = 0, brickCt = 0, grainCt = 0, woolCt = 0, oreCt = 0; //Resources
         private int cityCt = 0, settlementCt = 0, roadCt = 0; //Buildings
-        private bool longestRoad = false, largestArmy = false;
+        private int vpCardsPlayed = 0;
+        private bool longestRoad = false, largestArmy = false, victory = false;
         public enum resourceType { Lumber, Grain, Wool, Ore, Brick}
+        public ArrayList DevCards;
+        private static ArrayList allPlayers = new ArrayList();
+        private static int largestArmyCt = 2;
 
         public Player(string nome, Color colore)
         {
             name = nome;
             colour = colore;
+            DevCards = new ArrayList();
+            allPlayers.Add(this);
         }
 
         public Player(Player p)
         {
             name = p.Name;
             colour = p.Colour;
+            DevCards = new ArrayList();
         }
 
         public string Name
@@ -47,9 +56,9 @@ namespace IntegrationTest1._1
             get { return victoryPts; }
         }
 
-        public int Knights
+        public int KnightCount
         {
-            get { return knights; }
+            get { return knightCt; }
         }
 
         public int LumberCount
@@ -102,12 +111,17 @@ namespace IntegrationTest1._1
             get { return largestArmy; }
         }
 
+        public bool Victory
+        {
+            get { return victory; }
+        }
+
         public void StartTurn(GameScreen g)
         {
+            SetVictoryPoints();
             g.playerUI.Text = Name;
             g.playerUI_Info.Text = Name + " Information";
-            g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
-            g.playerUI_KnightCount.Text = Convert.ToString(Knights);
+            g.playerUI_KnightCount.Text = Convert.ToString(KnightCount);
             //Cities, Settlements, Roads
             g.playerUI_CityCount.Text = Convert.ToString(CityCount);
             g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
@@ -118,100 +132,97 @@ namespace IntegrationTest1._1
             g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
             g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
             g.playerUI_OreCount.Text = Convert.ToString(OreCount);
+            
+            g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
+            if (LargestArmy)
+            {
+                g.picLargestArmy.Image = Resources.largestArmy;
+            }
+            else
+            {
+                g.picLargestArmy.Image = null;
+            }
         }
 
         public void BuildInitialSettlement(GameScreen g)
         {
-                settlementCt += 1;
-                SetVictoryPoints();
-                MessageBox.Show("Settlement placed!");
-                //Update display
-                g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
-                g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
-                g.playerUI_BuildSettlement.Enabled = false;
-                g.playerUI_BuildRoad.Enabled = true;             
+            settlementCt += 1;
+            SetVictoryPoints();
+            MessageBox.Show("Settlement placed!");
+            //Update display
+            g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
+            g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
+            g.playerUI_BuildSettlement.Enabled = false;
+            g.playerUI_BuildRoad.Enabled = true;             
         }
 
         public void BuildInitialRoad(GameScreen g)
         {
-            DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a road here?", "Confirmation", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                roadCt += 1;
-                SetVictoryPoints();
-                MessageBox.Show("Road placed!");
-                g.playerUI_RoadCount.Text = Convert.ToString(RoadCount);
-                g.playerUI_BuildRoad.Enabled = false;
-                g.playerUI_EndTurn.Enabled = true;
-            }
+            roadCt += 1;
+            SetVictoryPoints();
+            MessageBox.Show("Road placed!");
+            g.playerUI_RoadCount.Text = Convert.ToString(RoadCount);
+            g.playerUI_BuildRoad.Enabled = false;
+            g.playerUI_EndTurn.Enabled = true;
         }
 
-        public void BuildSettlement(GameScreen g) //For testing purposes; not the real implementation
+        public void BuildSettlement(GameScreen g)
         {
-                    settlementCt += 1;
-                    brickCt -= 1;
-                    lumberCt -= 1;
-                    woolCt -= 1;
-                    grainCt -= 1;
-                    SetVictoryPoints();
-                    MessageBox.Show("Settlement placed!");
-                    //Update display
-                    g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
-                    g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
-                    g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
-                    g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
-                    g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
-                    g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
+            settlementCt += 1;
+            brickCt -= 1;
+            lumberCt -= 1;
+            woolCt -= 1;
+            grainCt -= 1;
+            SetVictoryPoints();
+            MessageBox.Show("Settlement placed!");
+            //Update display
+            g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
+            g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
+            g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
+            g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
+            g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
+            g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
         }
 
-        public void BuildCity(GameScreen g) //For testing purposes; not the real implementation
+        public void BuildCity(GameScreen g)
         {
-                    cityCt += 1;
-                    settlementCt -= 1;
-                    oreCt -= 3;
-                    grainCt -= 2;
-                    SetVictoryPoints();
-                    MessageBox.Show("City created!");
-                    //Update display
-                    g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
-                    g.playerUI_CityCount.Text = Convert.ToString(CityCount);
-                    g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
-                    g.playerUI_OreCount.Text = Convert.ToString(OreCount);
-                    g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);               
+            cityCt += 1;
+            settlementCt -= 1;
+            oreCt -= 3;
+            grainCt -= 2;
+            SetVictoryPoints();
+            MessageBox.Show("City created!");
+            //Update display
+            g.playerUI_VPCount.Text = Convert.ToString(VictoryPoints);
+            g.playerUI_CityCount.Text = Convert.ToString(CityCount);
+            g.playerUI_SettlementCount.Text = Convert.ToString(SettlementCount);
+            g.playerUI_OreCount.Text = Convert.ToString(OreCount);
+            g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);               
         }
 
-        public void BuildRoad(GameScreen g) //For testing purposes; not the real implementation
+        public void BuildRoad(GameScreen g)
         {
-            // can only build a maximum of fifteen roads
-            if (RoadCount == 15)
-            {
-                MessageBox.Show("You've reached the maximum number of roads(15)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            // costs 1 brick 1 lumber
-            if (BrickCount >= 1 && LumberCount >= 1)
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a road here?", "Confirmation", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    roadCt += 1;
-                    brickCt -= 1;
-                    lumberCt -= 1;
-                    SetVictoryPoints();
-                    MessageBox.Show("Road placed!");
-                    g.playerUI_RoadCount.Text = Convert.ToString(RoadCount);
-                    g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
-                    g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
-                }                
-            } else
-            {
-                MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            roadCt += 1;
+            brickCt -= 1;
+            lumberCt -= 1;
+            SetVictoryPoints();
+            MessageBox.Show("Road placed!");
+            g.playerUI_RoadCount.Text = Convert.ToString(RoadCount);
+            g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
+            g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
+        }
+
+        public void BuyDevCard()
+        {
+            woolCt -= 1;
+            oreCt -= 1;
+            grainCt -= 1;
         }
 
         private void SetVictoryPoints()
         {
-            int pts = 0;
+            int pts = vpCardsPlayed;
             if (LongestRoad)
             {
                 pts += 2;
@@ -220,8 +231,14 @@ namespace IntegrationTest1._1
             {
                 pts += 2;
             }
-
             victoryPts = pts + SettlementCount + (2 * CityCount);
+
+            if (VictoryPoints >= 10)
+            {
+                MessageBox.Show("You are the winner!  Click the \"End Turn\" button to end the game.",
+                    "Victory", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                victory = true;
+            }
         }
 
         public void HarvestResources(Hex h, Settlement s)
@@ -351,7 +368,7 @@ namespace IntegrationTest1._1
             recipient.ReceiveTrade(theirResource, theirAmt, myResource, myAmt);
         }
 
-        protected void ReceiveTrade(resourceType myResource, int myAmt, resourceType theirResource, int theirAmt)
+        private void ReceiveTrade(resourceType myResource, int myAmt, resourceType theirResource, int theirAmt)
         {
             // Resource the recipient player is giving
             switch (myResource)
@@ -391,6 +408,43 @@ namespace IntegrationTest1._1
                     brickCt += myAmt;
                     break;
             }
+        }
+
+        public void AddKnight()
+        {
+            knightCt += 1;
+            if (KnightCount > largestArmyCt)
+            {
+                MessageBox.Show("Your army has surpassed all others.  Take two extra victory points", "Largest Army!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                largestArmy = true;
+                for (int i = 0; i < allPlayers.Count; i++)
+                {
+                    Player currentPlayer = (Player)allPlayers[i];
+                    if (currentPlayer != this)
+                    {
+                        currentPlayer.largestArmy = false;
+                    }                    
+                }
+                SetVictoryPoints();
+                largestArmyCt = KnightCount;
+            }
+        }
+
+        public void AddVPCard()
+        {
+            vpCardsPlayed += 1;
+            SetVictoryPoints();
+        }
+
+        public static void ClearPlayerCount()
+        {
+            allPlayers = new ArrayList();
+        }
+
+        public static void ResetLargestArmy()
+        {
+            largestArmyCt = 2;
         }
     }
 }

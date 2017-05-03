@@ -6,25 +6,35 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using IntegrationTest1._1.Properties;
-using IntegrationTest1._1.Forms;
+using IntegrationTest1._1;
 
 namespace IntegrationTest1._1
 {
-    class Board
+    public class Board
     {
-        // private const int NUMBER_OF_TILES = 19;
-        public Hex[][] Hexes = new Hex[][] { new Hex[] {null, null, null},
-        new Hex[] { null, null, null, null},
-        new Hex[] { null, null, null, null, null},
-        new Hex[] {null, null, null, null},
-        new Hex[] {null, null, null}};
-        public Node[][] Nodes = new Node[][] { new Node[] { null, null, null },
-        new Node[] { null, null, null, null }, new Node[] { null, null, null, null },
-        new Node[] { null, null, null, null, null }, new Node[] { null, null, null, null, null },
-        new Node[] { null, null, null, null, null, null }, new Node[] { null, null, null, null, null, null },
-        new Node[] { null, null, null, null, null }, new Node[] { null, null, null, null, null },
-        new Node[] { null, null, null, null }, new Node[] { null, null, null, null },
-        new Node[] { null, null, null}};
+        public Hex[][] Hexes = new Hex[][] { new Hex[] {null, null, null}, //3
+        new Hex[] { null, null, null, null},    //4
+        new Hex[] { null, null, null, null, null},  //5
+        new Hex[] {null, null, null, null}, //4
+        new Hex[] {null, null, null}};  //3
+        public Node[][] Nodes = new Node[][] { new Node[] { null, null, null }, //3
+        new Node[] { null, null, null, null }, new Node[] { null, null, null, null },   //4 ~ 4
+        new Node[] { null, null, null, null, null }, new Node[] { null, null, null, null, null }, //5 ~ 5
+        new Node[] { null, null, null, null, null, null }, new Node[] { null, null, null, null, null, null }, //6 ~ 6
+        new Node[] { null, null, null, null, null }, new Node[] { null, null, null, null, null },   //5 ~ 5
+        new Node[] { null, null, null, null }, new Node[] { null, null, null, null },   //4 ~ 4
+        new Node[] { null, null, null}};    //3
+        public Edge[][] Edges = new Edge[][] { new Edge[] { null, null, null, null, null, null }, //6
+        new Edge[] { null, null, null, null},  //4
+        new Edge[] { null, null, null, null, null, null, null, null },  //8
+        new Edge[] { null, null, null, null, null },  //5
+        new Edge[] { null, null, null, null, null, null, null, null, null, null },  //10
+        new Edge[] { null, null, null, null, null, null },  //6
+        new Edge[] { null, null, null, null, null, null, null, null, null, null },  //10
+        new Edge[] { null, null, null, null, null },  //5
+        new Edge[] { null, null, null, null, null, null, null, null },  //8
+        new Edge[] { null, null, null, null },  //4
+        new Edge[] { null, null, null, null, null, null }}; //6
         private int[] tokenValues = {10, 2, 9, 12, 6, 4, 10, 9, 11, 3, 8, 8, 3, 4, 5, 5, 6, 11 };
         private static Random RNG = new Random();
         private const float X_START_POINT = 250;
@@ -38,6 +48,7 @@ namespace IntegrationTest1._1
             ShuffleHexes();
             ArrangeHexes();
             InitializeNodes();
+            InitializeEdges();
         }
 
         /* private void ShuffleTokens()
@@ -203,6 +214,90 @@ namespace IntegrationTest1._1
                 totalWidth = 0;
             }
         }
+
+        private void InitializeEdges()
+        {
+            //starting point of lines
+            PointF start = new PointF();
+            start.X = X_START_POINT + Hex.Radius * (float)Math.Sin(4 * 60 * Math.PI / 180f);
+            start.Y = Y_START_POINT + Hex.Radius * (float)Math.Cos(4 * 60 * Math.PI / 180f);
+
+            float width = (float)Math.Sqrt(3) * Hex.Radius;
+            float totalWidth = 0;
+
+            for (int i = 0; i <= Edges.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= Edges[i].GetUpperBound(0); j++)
+                {
+                    PointF end = new PointF();
+                    if (i % 2 == 0) //even row, diagonal line
+                    {
+                        end.X = start.X + width / 2;
+                        totalWidth += width / 2;
+                        if (i < Edges.Length /2) //before halfway point 
+                        {
+                            if (j % 2 == 0) //even column
+                            {
+                                end.Y = start.Y - Hex.Radius / 2;
+                            }
+                            else //odd column
+                            {
+                                end.Y = start.Y + Hex.Radius / 2;
+                            }
+                        }
+                        else //after halfway point
+                        {
+                            if (j % 2 == 0) //even column
+                            {
+                                end.Y = start.Y + Hex.Radius / 2;
+                            }
+                            else //odd column
+                            {
+                                end.Y = start.Y - Hex.Radius / 2;
+                            }
+                        }
+                        Edges[i][j] = new Edge(start, end);
+                        start = end;
+                    }
+                    else //odd row, vertical line
+                    {
+                        totalWidth += width;
+                        end.X = start.X;
+                        end.Y = start.Y + Hex.Radius;
+                        Edges[i][j] = new Edge(start, end);
+                        start.X += width;
+                    }
+                }
+                // Determining the start point for the next row
+                if (i < Edges.Length / 2) // before halfway point
+                {
+                    if (i % 2 == 0) // even row
+                    {
+                        start.X -= totalWidth;
+                    }
+                    else // odd row
+                    {
+                        start.X -= totalWidth + width / 2;
+                        start.Y += 3 * Hex.Radius / 2;
+                    }
+                }
+                else
+                {
+                    if (i % 2 == 0) // even row
+                    {
+                        start.X -= totalWidth - width / 2;
+                        start.Y += Hex.Radius / 2;
+                    }
+                    else // odd row
+                    {
+                        start.X -= totalWidth;
+                        start.Y += Hex.Radius;
+                    }
+                }
+                totalWidth = 0;
+            }
+        }
+
 
         /*public void GetHex(Label lbl, int i, int j)
         {

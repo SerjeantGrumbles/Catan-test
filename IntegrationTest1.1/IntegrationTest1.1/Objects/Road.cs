@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace IntegrationTest1._1
 {
-    class Road
+    public class Road
     {
         private int playerNum;
         private Color colour;

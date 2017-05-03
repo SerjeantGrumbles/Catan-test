@@ -8,7 +8,7 @@ using IntegrationTest1._1.Properties;
 
 namespace IntegrationTest1._1
 {
-    class City : Settlement
+    public class City : Settlement
     {
         public City (Settlement s)
         {

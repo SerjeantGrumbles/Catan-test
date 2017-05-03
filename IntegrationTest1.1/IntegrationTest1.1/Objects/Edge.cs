@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace IntegrationTest1._1
 {
-    class Edge
+    public class Edge
     {
         private PointF ptA;
         private PointF ptB;
