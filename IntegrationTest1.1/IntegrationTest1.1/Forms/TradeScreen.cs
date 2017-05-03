@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IntegrationTest1._1.Forms
+namespace IntegrationTest1._1
 {
     public partial class TradeScreen : Form
     {

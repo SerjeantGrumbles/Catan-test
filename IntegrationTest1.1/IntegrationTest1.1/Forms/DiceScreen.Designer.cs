@@ -1,4 +1,4 @@
-﻿namespace IntegrationTest1._1.Forms
+﻿namespace IntegrationTest1._1
 {
     partial class DiceScreen
     {

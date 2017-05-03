@@ -14,21 +14,33 @@ namespace IntegrationTest1._1
     public partial class GameScreen : Form
     {
         private Board gameBoard = new Board();
-        private Label[][] lblTokens = new Label[][] { new Label[] { new Label(), new Label(), new Label() },
-            new Label[] { new Label(), new Label(), new Label(), new Label() },
-            new Label[] { new Label(), new Label(), new Label(), new Label(), new Label() },
-            new Label[] { new Label(), new Label(), new Label(), new Label() },
-            new Label[] { new Label(), new Label(), new Label() }};
-        public PictureBox[][] picNodes = new PictureBox[][] { new PictureBox[] { null, null, null },
-        new PictureBox[] { null, null, null, null }, new PictureBox[] { null, null, null, null },
-        new PictureBox[] { null, null, null, null, null }, new PictureBox[] { null, null, null, null, null },
-        new PictureBox[] { null, null, null, null, null, null }, new PictureBox[] { null, null, null, null, null, null },
-        new PictureBox[] { null, null, null, null, null }, new PictureBox[] { null, null, null, null, null },
-        new PictureBox[] { null, null, null, null }, new PictureBox[] { null, null, null, null },
-        new PictureBox[] { null, null, null}};
+        private Label[][] lblTokens = new Label[][] { new Label[] { new Label(), new Label(), new Label() }, //3
+            new Label[] { new Label(), new Label(), new Label(), new Label() }, //4
+            new Label[] { new Label(), new Label(), new Label(), new Label(), new Label() },    //5
+            new Label[] { new Label(), new Label(), new Label(), new Label() }, //4
+            new Label[] { new Label(), new Label(), new Label() }}; //3
+        private PictureBox[][] picNodes = new PictureBox[][] { new PictureBox[] { null, null, null }, //3
+        new PictureBox[] { null, null, null, null }, new PictureBox[] { null, null, null, null }, //4 ~ 4
+        new PictureBox[] { null, null, null, null, null }, new PictureBox[] { null, null, null, null, null }, //5 ~ 5
+        new PictureBox[] { null, null, null, null, null, null }, new PictureBox[] { null, null, null, null, null, null }, //6 ~ 6
+        new PictureBox[] { null, null, null, null, null }, new PictureBox[] { null, null, null, null, null },   //5 ~ 5
+        new PictureBox[] { null, null, null, null }, new PictureBox[] { null, null, null, null },   //4 ~ 4
+        new PictureBox[] { null, null, null}};  //3
+        private Label[][] lblEdges = new Label[][] { new Label[] { null, null, null, null, null, null }, //6
+        new Label[] { null, null, null, null},  //4
+        new Label[] { null, null, null, null, null, null, null, null },  //8
+        new Label[] { null, null, null, null, null },  //5
+        new Label[] { null, null, null, null, null, null, null, null, null, null },  //10
+        new Label[] { null, null, null, null, null, null },  //6
+        new Label[] { null, null, null, null, null, null, null, null, null, null },  //10
+        new Label[] { null, null, null, null, null },  //5
+        new Label[] { null, null, null, null, null, null, null, null },  //8
+        new Label[] { null, null, null, null },  //4
+        new Label[] { null, null, null, null, null, null }}; //6
         private Dice dice = new Dice();
         public Player[] players = new Player[4];
-        private int round = 3;  //start from round 3 for testing purposes
+        private DevCardDeck cardDeck = new DevCardDeck();
+        private int round = 1;  //start from round 3 for testing purposes
         private int turn = 0;
         private int thRow;
         private int thCol;
@@ -41,6 +53,7 @@ namespace IntegrationTest1._1
         {
             GenerateTokens();
             GenerateNodes();
+            GenerateEdges();
             InitializePlayerUI();
         }
 
@@ -63,26 +76,33 @@ namespace IntegrationTest1._1
                         TextureBrush texture = new TextureBrush(hexImages[i][j]);
                         texture.WrapMode = System.Drawing.Drawing2D.WrapMode.Tile;
                         Graphics formGraphics = this.CreateGraphics();                        
-                        Pen pen15 = new Pen(Color.Black, 5);
-                        
 
-                        formGraphics.DrawPolygon(pen15, gameBoard.Hexes[i][j].Points); //draw the outline of the hex
                         formGraphics.FillPolygon(texture, gameBoard.Hexes[i][j].Points); //fill the hex with the terrain texture
-
-                        /*Pen pen16 = new Pen(Color.Red, 8);
-                        float xCoord = 200 + Hex.Radius * (float)Math.Sin(4 * 60 * Math.PI / 180f);
-                        float yCoord = 200 + Hex.Radius * (float)Math.Cos(4 * 60 * Math.PI / 180f);
-                        PointF pointA = new PointF(xCoord, yCoord);
-                        PointF pointB = new PointF(xCoord + ((float)Math.Sqrt(3) * Hex.Radius) / 2, 
-                            yCoord - Hex.Radius / 2);
-                        formGraphics.DrawLine(pen16, pointA, pointB);*/
-                        formGraphics.Dispose();
                     }
                     catch (System.IO.FileNotFoundException)
                     {
                         MessageBox.Show("There was an error opening the bitmap." +
                     "Please check the path.");
                     }
+                }
+            }
+
+            for (int i = 0; i <= gameBoard.Edges.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= gameBoard.Edges[i].GetUpperBound(0); j++)
+                {
+                    Graphics formGraphics = this.CreateGraphics();
+                    Pen pen15;
+                    if (gameBoard.Edges[i][j].Road != null)
+                    {
+                        pen15 = new Pen(gameBoard.Edges[i][j].Road.Colour, 8);                                             
+                    }
+                    else
+                    {
+                        pen15 = new Pen(Color.DarkGreen, 2);
+                    }
+                    formGraphics.DrawLine(pen15, gameBoard.Edges[i][j].PointA, gameBoard.Edges[i][j].PointB);
+                    formGraphics.Dispose();
                 }
             }
         } // end GameScreen_Paint
@@ -100,7 +120,6 @@ namespace IntegrationTest1._1
                         (int)gameBoard.Hexes[i][j].MidpointY - 10);
                     lblTokens[i][j].Font = new System.Drawing.Font("Copperplate Gothic Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     lblTokens[i][j].Name = "token" + i + "_" + j;
-                    //lblTokens[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
                     if (gameBoard.Hexes[i][j].Thief)
                     {
                         lblTokens[i][j].Size = new System.Drawing.Size(32, 32);
@@ -113,9 +132,6 @@ namespace IntegrationTest1._1
                     }                   
                     lblTokens[i][j].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                     lblTokens[i][j].Text = gameBoard.GetToken(i, j);
-                    //lblTokens[i][j].Click += new EventHandler(lblTokens_Click);
-                    //lblTokens[i][j].MouseHover += new System.EventHandler(lblTokens_MouseHover);
-                    //lblTokens[i][j].MouseLeave += new System.EventHandler(lblTokens_MouseLeave);
                     Controls.Add(lblTokens[i][j]);
 
                 }
@@ -138,6 +154,26 @@ namespace IntegrationTest1._1
                     picNodes[i][j].Visible = false;
                     picNodes[i][j].SizeMode = PictureBoxSizeMode.StretchImage;
                     Controls.Add(picNodes[i][j]);
+                }
+            }
+        }
+
+        private void GenerateEdges()
+        {
+            for (int i = 0; i <= lblEdges.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= lblEdges[i].GetUpperBound(0); j++)
+                {
+                    lblEdges[i][j] = new Label();
+                    lblEdges[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
+                    int locX = (int)(gameBoard.Edges[i][j].PointA.X + gameBoard.Edges[i][j].PointB.X) / 2;
+                    int locY = (int)(gameBoard.Edges[i][j].PointA.Y + gameBoard.Edges[i][j].PointB.Y) / 2;                  
+                    lblEdges[i][j].Location = new System.Drawing.Point(locX - 5, locY - 5);
+                    lblEdges[i][j].Name = "edge" + i + "_" + j;
+                    lblEdges[i][j].Size = new System.Drawing.Size(10, 10);
+                    lblEdges[i][j].TabStop = false;
+                    lblEdges[i][j].Visible = false;
+                    Controls.Add(lblEdges[i][j]);
                 }
             }
         }
@@ -187,7 +223,7 @@ namespace IntegrationTest1._1
         private void btnStart_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Initialzing game.  Dice rolls will determine player order.");
-            Forms.DiceScreen diceScreen = new Forms.DiceScreen();
+            DiceScreen diceScreen = new DiceScreen();
 
             diceScreen.Show();
             btnStart.Visible = false;
@@ -205,12 +241,17 @@ namespace IntegrationTest1._1
                 players[0].Name));
             lblRoundCount.Visible = true;
             lblRoundCount.Text = "Round 1";
-            // For testing purposes, Build City button enabled from the start
-            playerUI_BuildCity.Enabled = true;
+            // For testing purposes, Roll Dice button enabled from the start
+            //btnRoll.Enabled = true;
         }
 
         private void playerUI_EndTurn_Click(object sender, EventArgs e)
         {
+            if (players[turn].Victory)
+            {
+                EndGame();
+                return;
+            }
             int nextTurn;
             switch (round)
             {
@@ -230,7 +271,6 @@ namespace IntegrationTest1._1
                     }
                     players[turn].StartTurn(this);
                     playerUI_BuildSettlement.Enabled = true;
-                    playerUI_EndTurn.Enabled = false;
                     break;
                 case 2: // round 2, everyone builds second settlement and road, this time going in reverse order                   
                     if (turn > 0)
@@ -239,7 +279,7 @@ namespace IntegrationTest1._1
                         MessageBox.Show(String.Format("End of turn for {0}.  {1}, build your second settlement and road.",
                                 players[turn].Name, players[nextTurn].Name));
                         turn = nextTurn;
-                        playerUI_EndTurn.Enabled = false;
+                        playerUI_BuildSettlement.Enabled = true;
                     } else
                     {
                         nextTurn = turn;
@@ -247,13 +287,14 @@ namespace IntegrationTest1._1
                         MessageBox.Show(String.Format("{0}, it is now your turn.", players[turn].Name));
                         round += 1;
                         lblRoundCount.Text = String.Format("Round {0}", round);
-                        playerUI_BuildRoad.Enabled = true;
-                        playerUI_BuildCity.Enabled = true;
+                        //playerUI_BuildRoad.Enabled = true;
+                        //playerUI_BuildCity.Enabled = true;
+                        btnRoll.Enabled = true;
                         playerUI_TradeP2.Visible = true;
                         playerUI_TradeP3.Visible = true;
                         playerUI_TradeP4.Visible = true;
-                    }
-                    playerUI_BuildSettlement.Enabled = true;
+                        playerUI_PlayDevCard.Visible = true;
+                    }                   
                     players[turn].StartTurn(this);
                     break;
                 default: // start of the game proper, covering all rounds after the first two
@@ -290,11 +331,20 @@ namespace IntegrationTest1._1
                             playerUI_TradeP4.Visible = false;
                             break;
                     }
-                    
+                    btnRoll.Enabled = true;
+                    playerUI_BuildSettlement.Enabled = false;
+                    playerUI_TradeP1.Enabled = false;
+                    playerUI_TradeP2.Enabled = false;
+                    playerUI_TradeP3.Enabled = false;
+                    playerUI_TradeP4.Enabled = false;
                     turn = nextTurn;
                     players[turn].StartTurn(this);
                     break;
-            }          
+            }
+            playerUI_BuildRoad.Enabled = false;
+            playerUI_BuildCity.Enabled = false;
+            playerUI_DevCard.Enabled = false;
+            playerUI_EndTurn.Enabled = false;
         }
 
         private void playerUI_BuildSettlement_Click(object sender, EventArgs e)
@@ -323,122 +373,27 @@ namespace IntegrationTest1._1
             playerUI_TradeP2.Enabled = false;
             playerUI_TradeP3.Enabled = false;
             playerUI_TradeP4.Enabled = false;
+            playerUI_PlayDevCard.Enabled = false;
             playerUI_EndTurn.Enabled = false;
             playerUI_BuildSettlement.Text = "Cancel";
             playerUI_BuildSettlement.Click -= playerUI_BuildSettlement_Click;
             playerUI_BuildSettlement.Click += new EventHandler(CancelSettlement_Click);
-            /*for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
-            {
-                for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
-                {
-                    if (gameBoard.Hexes[i][j].Terrain != Hex.terrainType.Desert)
-                    {
-                        if (i > gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i)][j + 1].Town == null)
-                        {
-                                picNodes[(2 * i)][j + 1].Visible = true;
-                                picNodes[(2 * i)][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        else if (gameBoard.Nodes[(2 * i)][j].Town == null)
-                        {
-                            picNodes[(2 * i)][j].Visible = true;
-                            picNodes[(2 * i)][j].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        if (i >= gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i) + 3][j].Town == null)
-                        {
-                            picNodes[(2 * i) + 3][j].Visible = true;
-                            picNodes[(2 * i) + 3][j].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        else if (gameBoard.Nodes[(2 * i) + 3][j + 1].Town == null)
-                        {
-                            picNodes[(2 * i) + 3][j + 1].Visible = true;
-                            picNodes[(2 * i) + 3][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        if (gameBoard.Nodes[(2 * i) + 1][j].Town == null)
-                        {
-                            picNodes[(2 * i) + 1][j].Visible = true;
-                            picNodes[(2 * i) + 1][j].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        if (gameBoard.Nodes[(2 * i) + 1][j + 1].Town == null)
-                        {
-                            picNodes[(2 * i) + 1][j + 1].Visible = true;
-                            picNodes[(2 * i) + 1][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        if (gameBoard.Nodes[(2 * i) + 2][j].Town == null)
-                        {
-                            picNodes[(2 * i) + 2][j].Visible = true;
-                            picNodes[(2 * i) + 2][j].Click += new System.EventHandler(SelectSettlement_Click);
-                        }
-                        if (gameBoard.Nodes[(2 * i) + 2][j + 1].Town == null)
-                        {
-                            picNodes[(2 * i) + 2][j + 1].Visible = true;
-                            picNodes[(2 * i) + 2][j + 1].Click += new System.EventHandler(SelectSettlement_Click);
-                        }                        
-                    }
-                }
-            }*/
             for (int i = 0; i <= gameBoard.Nodes.GetUpperBound(0); i++)
             {
                 for (int j = 0; j <= gameBoard.Nodes[i].GetUpperBound(0); j++)
                 {
                    if (gameBoard.Nodes[i][j] != null && gameBoard.Nodes[i][j].Town == null)
                     {
-                        try
+                        if (TownAdjacentTowns(i, j))
                         {
-                            if (gameBoard.Nodes[i + 1][j].Town != null)
-                            {
-                                continue;
-                            }
-                        }
-                        catch (IndexOutOfRangeException) { }
-                        try
+                            continue;
+                        }                                               
+                        if (round < 3 || TownAdjacentRoads(i, j))
                         {
-                            if (gameBoard.Nodes[i - 1][j].Town != null)
-                            {
-                                continue;
-                            }
-                        }
-                        catch (IndexOutOfRangeException) { }
-                        try
-                        {
-                            if (i % 2 == 1) //Odd row
-                            {
-                                if (i < gameBoard.Nodes.Length / 2) //Before halfway point
-                                {
-                                    if (gameBoard.Nodes[i - 1][j - 1].Town != null)
-                                    {
-                                        continue;
-                                    }
-                                }
-                                else //After halfway point
-                                {
-                                    if (gameBoard.Nodes[i - 1][j + 1].Town != null)
-                                    {
-                                        continue;
-                                    }
-                                }
-                            }
-                            else //Even row
-                            {
-                                if (i < gameBoard.Nodes.Length / 2) //Before halfway point
-                                {
-                                    if (gameBoard.Nodes[i + 1][j + 1].Town != null)
-                                    {
-                                        continue;
-                                    }
-                                }
-                                else //After halfway point
-                                {
-                                    if (gameBoard.Nodes[i + 1][j - 1].Town != null)
-                                    {
-                                        continue;
-                                    }
-                                }
-                            }
-                        }
-                        catch (IndexOutOfRangeException) { }
-                        picNodes[i][j].Visible = true;
-                        picNodes[i][j].BackColor = players[turn].Colour;
-                        picNodes[i][j].Click += new EventHandler(SelectSettlement_Click);
+                            picNodes[i][j].Visible = true;
+                            picNodes[i][j].BackColor = players[turn].Colour;
+                            picNodes[i][j].Click += new EventHandler(SelectSettlement_Click);
+                        }                       
                     }
                 }
             }
@@ -475,6 +430,7 @@ namespace IntegrationTest1._1
             playerUI_TradeP2.Enabled = false;
             playerUI_TradeP3.Enabled = false;
             playerUI_TradeP4.Enabled = false;
+            playerUI_PlayDevCard.Enabled = false;
             playerUI_EndTurn.Enabled = false;
             playerUI_BuildCity.Text = "Cancel";
             playerUI_BuildCity.Click -= playerUI_BuildCity_Click;
@@ -498,6 +454,53 @@ namespace IntegrationTest1._1
             }
         }
 
+        private void playerUI_BuildRoad_Click(object sender, EventArgs e)
+        {
+            if (round > 2)
+            {
+                // can only build a maximum of fifteen roads
+                if (players[turn].RoadCount == 15)
+                {
+                    MessageBox.Show("You've reached the maximum number of roads(15)", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // costs 1 brick 1 lumber
+                if (players[turn].BrickCount < 1 || players[turn].LumberCount < 1)
+                {
+                    MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            btnRoll.Enabled = false;
+            playerUI_BuildSettlement.Enabled = false;
+            playerUI_BuildCity.Enabled = false;
+            playerUI_DevCard.Enabled = false;
+            playerUI_TradeP1.Enabled = false;
+            playerUI_TradeP2.Enabled = false;
+            playerUI_TradeP3.Enabled = false;
+            playerUI_TradeP4.Enabled = false;
+            playerUI_PlayDevCard.Enabled = false;
+            playerUI_EndTurn.Enabled = false;
+            playerUI_BuildRoad.Text = "Cancel";
+            playerUI_BuildRoad.Click -= playerUI_BuildRoad_Click;
+            playerUI_BuildRoad.Click += new EventHandler(CancelRoad_Click);
+            for (int i = 0; i <= gameBoard.Edges.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= gameBoard.Edges[i].GetUpperBound(0); j++)
+                {
+                    if (gameBoard.Edges[i][j].Road == null)
+                    {                          
+                        if (RoadAdjacentTowns(i,j) || RoadAdjacentRoads(i, j))
+                        {
+                        lblEdges[i][j].Visible = true;
+                        lblEdges[i][j].BackColor = players[turn].Colour;
+                        lblEdges[i][j].Click += new EventHandler(SelectRoad_Click);
+                        }
+                    }
+                }
+            }
+        }
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             //reset players
@@ -506,6 +509,7 @@ namespace IntegrationTest1._1
                 players[i] = new Player(players[i]);
             }
             gameBoard = new Board(); //reset board
+            cardDeck = new DevCardDeck();
             EraseTokens();
             GenerateTokens();
             EraseNodes();
@@ -518,40 +522,45 @@ namespace IntegrationTest1._1
             picDice1.Visible = false;
             picDice2.Visible = false;
             lblRoundCount.Visible = false;
+            victoryPanel.Visible = false;
             btnStart.Visible = true;
+            btnRoll.Enabled = false;
             playerUI_BuildSettlement.Enabled = true;
             playerUI_BuildRoad.Enabled = false;
+            playerUI_BuildCity.Enabled = false;
+            playerUI_TradeP1.Enabled = false;
+            playerUI_TradeP2.Enabled = false;
+            playerUI_TradeP3.Enabled = false;
+            playerUI_TradeP4.Enabled = false;
             playerUI_EndTurn.Enabled = false;
-            picBuildCosts.Visible = false;
+            playerUI.Enabled = true;
+            round = 1;
             playerUI_BuildSettlement.Text = "Build Settlement";
             playerUI_BuildRoad.Text = "Build Road";
             playerUI_BuildCity.Text = "Build City";
-        }
+        }       
 
-        private void playerUI_BuildRoad_Click(object sender, EventArgs e)
+        private void EndGame()
         {
-            if (round < 3)
-            {
-                players[turn].BuildInitialRoad(this);
-            } else
-            {
-                players[turn].BuildRoad(this);
-            }            
+            victoryPanel.Visible = true;
+            lblPlayerVictor.Text = players[turn].Name;
+            lblPlayerVictor.ForeColor = players[turn].Colour;
+            playerUI.Enabled = false;
         }
 
         private void CancelSettlement_Click(object sender, EventArgs e)
         {
-            HideNodes();
-            btnRoll.Enabled = true;           
-            playerUI_TradeP1.Enabled = true;
-            playerUI_TradeP2.Enabled = true;
-            playerUI_TradeP3.Enabled = true;
-            playerUI_TradeP4.Enabled = true;
+            HideNodes();        
             if (round > 2)
             {
                 playerUI_BuildCity.Enabled = true;
                 playerUI_DevCard.Enabled = true;
                 playerUI_BuildRoad.Enabled = true;
+                playerUI_PlayDevCard.Enabled = true;
+                playerUI_TradeP1.Enabled = true;
+                playerUI_TradeP2.Enabled = true;
+                playerUI_TradeP3.Enabled = true;
+                playerUI_TradeP4.Enabled = true;
                 playerUI_EndTurn.Enabled = true;
             }            
             playerUI_BuildSettlement.Text = "Build Settlement";
@@ -561,13 +570,27 @@ namespace IntegrationTest1._1
 
         private void CancelRoad_Click(object sender, EventArgs e)
         {
-
+            HideEdges();            
+            if (round > 2)
+            {
+                playerUI_BuildSettlement.Enabled = true;
+                playerUI_DevCard.Enabled = true;
+                playerUI_PlayDevCard.Enabled = true;
+                playerUI_BuildCity.Enabled = true;
+                playerUI_TradeP1.Enabled = true;
+                playerUI_TradeP2.Enabled = true;
+                playerUI_TradeP3.Enabled = true;
+                playerUI_TradeP4.Enabled = true;
+                playerUI_EndTurn.Enabled = true;
+            }            
+            playerUI_BuildRoad.Text = "Build Road";
+            playerUI_BuildRoad.Click -= CancelRoad_Click;
+            playerUI_BuildRoad.Click += new EventHandler(playerUI_BuildRoad_Click);
         }
 
         private void CancelCity_Click(object sender, EventArgs e)
         {
             HideNodes();
-            btnRoll.Enabled = true;
             playerUI_TradeP1.Enabled = true;
             playerUI_TradeP2.Enabled = true;
             playerUI_TradeP3.Enabled = true;
@@ -575,6 +598,7 @@ namespace IntegrationTest1._1
             playerUI_BuildSettlement.Enabled = true;
             playerUI_DevCard.Enabled = true;
             playerUI_BuildRoad.Enabled = true;
+            playerUI_PlayDevCard.Enabled = true;
             playerUI_EndTurn.Enabled = true;
             playerUI_BuildCity.Text = "Build City";
             playerUI_BuildCity.Click -= CancelCity_Click;
@@ -594,6 +618,7 @@ namespace IntegrationTest1._1
                 else
                 {
                     players[turn].BuildInitialSettlement(this);
+                    playerUI_BuildSettlement.Enabled = false;
                 }
                 int i;
                 int j;
@@ -612,20 +637,21 @@ namespace IntegrationTest1._1
                 gameBoard.Nodes[i][j].Town = new Settlement(turn, players[turn].Colour);
                 thisNode.Image = gameBoard.Nodes[i][j].Town.Image;
                 thisNode.Click -= new EventHandler(SelectSettlement_Click);
-                thisNode.Size = new System.Drawing.Size(16, 16);
+                thisNode.Size = new System.Drawing.Size(21, 21);
+                thisNode.Location = new Point(thisNode.Location.X - 4, thisNode.Location.Y - 4);
                 thisNode.Cursor = Cursors.Arrow;
                 thisNode.Enabled = false;
                 HideNodes();
-                btnRoll.Enabled = true;
-                playerUI_TradeP1.Enabled = true;
-                playerUI_TradeP2.Enabled = true;
-                playerUI_TradeP3.Enabled = true;
-                playerUI_TradeP4.Enabled = true;
+                playerUI_BuildRoad.Enabled = true;
                 if (round > 2)
                 {
                     playerUI_BuildCity.Enabled = true;
                     playerUI_DevCard.Enabled = true;
-                    playerUI_BuildRoad.Enabled = true;
+                    playerUI_PlayDevCard.Enabled = true;
+                    playerUI_TradeP1.Enabled = true;
+                    playerUI_TradeP2.Enabled = true;
+                    playerUI_TradeP3.Enabled = true;
+                    playerUI_TradeP4.Enabled = true;
                     playerUI_EndTurn.Enabled = true;
                 }
                 playerUI_BuildSettlement.Text = "Build Settlement";
@@ -658,11 +684,11 @@ namespace IntegrationTest1._1
                 gameBoard.Nodes[i][j].Town = new City(gameBoard.Nodes[i][j].Town);
                 thisNode.Image = gameBoard.Nodes[i][j].Town.Image;
                 thisNode.Click -= SelectCity_Click;
-                thisNode.Size = new Size(22, 22);
+                thisNode.Size = new Size(30, 30);
+                thisNode.Location = new Point(thisNode.Location.X - 4, thisNode.Location.Y - 4);
                 thisNode.Cursor = Cursors.Arrow;
                 thisNode.Enabled = false;
                 HideNodes();
-                btnRoll.Enabled = true;
                 playerUI_TradeP1.Enabled = true;
                 playerUI_TradeP2.Enabled = true;
                 playerUI_TradeP3.Enabled = true;
@@ -670,6 +696,7 @@ namespace IntegrationTest1._1
                 playerUI_BuildSettlement.Enabled = true;
                 playerUI_DevCard.Enabled = true;
                 playerUI_BuildRoad.Enabled = true;
+                playerUI_PlayDevCard.Enabled = true;
                 playerUI_EndTurn.Enabled = true;
                 playerUI_BuildCity.Text = "Build City";
                 playerUI_BuildCity.Click -= CancelCity_Click;
@@ -677,8 +704,57 @@ namespace IntegrationTest1._1
             }
         }
 
+        private void SelectRoad_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to place a road here?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (round > 2)
+                {
+                    players[turn].BuildRoad(this);
+                }
+                else
+                {
+                    players[turn].BuildInitialRoad(this);
+                    playerUI_BuildRoad.Enabled = false;
+                }
+                int i;
+                int j;
+                Label thisLabel = (Label)sender;
+                if (thisLabel.Name.Length == 7)
+                {
+                    i = Convert.ToInt32(thisLabel.Name.Substring(4, 1));
+                    j = Convert.ToInt32(thisLabel.Name.Substring(6, 1));
+                }
+                else
+                {
+                    i = Convert.ToInt32(thisLabel.Name.Substring(4, 2));
+                    j = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
+                }
+                gameBoard.Edges[i][j].Road = new Road(turn, players[turn].Colour);
+                HideEdges();
+                if (round > 2)
+                {
+                    playerUI_BuildCity.Enabled = true;
+                    playerUI_DevCard.Enabled = true;
+                    playerUI_BuildSettlement.Enabled = true;
+                    playerUI_PlayDevCard.Enabled = true;
+                    playerUI_TradeP1.Enabled = true;
+                    playerUI_TradeP2.Enabled = true;
+                    playerUI_TradeP3.Enabled = true;
+                    playerUI_TradeP4.Enabled = true;
+                    playerUI_EndTurn.Enabled = true;
+                }
+                playerUI_BuildRoad.Text = "Build Road";
+                playerUI_BuildRoad.Click -= CancelRoad_Click;
+                playerUI_BuildRoad.Click += new EventHandler(playerUI_BuildRoad_Click);
+            }
+        }
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
+            Player.ClearPlayerCount();
+            Player.ResetLargestArmy();
             MainMenu mainMenu = (MainMenu)Application.OpenForms[0];
             mainMenu.Show();
             base.OnFormClosed(e);
@@ -691,7 +767,8 @@ namespace IntegrationTest1._1
             playerUI_DiceResult.Text = Convert.ToString(dice.DiceTotal);
             if (dice.DiceTotal == 7)
             {
-                MessageBox.Show("You rolled 7!  The thief has been unleashed!", "Dice rolled", 
+                MessageBox.Show("You rolled 7!  All players with over seven total resources lose half." +
+                    "\n" + "Click on one of the tokens to move the thief to a different tile.", "Dice rolled", 
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 for (int i = 0; i <= players.GetUpperBound(0); i++)
                 {
@@ -731,6 +808,18 @@ namespace IntegrationTest1._1
             playerUI_LumberCount.Text = Convert.ToString(players[turn].LumberCount);
             playerUI_OreCount.Text = Convert.ToString(players[turn].OreCount);
             playerUI_WoolCount.Text = Convert.ToString(players[turn].WoolCount);
+
+            btnRoll.Enabled = false;
+            playerUI_BuildSettlement.Enabled = true;
+            playerUI_BuildCity.Enabled = true;
+            playerUI_BuildRoad.Enabled = true;
+            playerUI_DevCard.Enabled = true;                                
+            playerUI_PlayDevCard.Enabled = true;
+            playerUI_EndTurn.Enabled = true;
+            playerUI_TradeP1.Enabled = true;
+            playerUI_TradeP2.Enabled = true;
+            playerUI_TradeP3.Enabled = true;
+            playerUI_TradeP4.Enabled = true;
         }
 
         private void DistributeResources(Hex h, int i, int j)
@@ -796,25 +885,6 @@ namespace IntegrationTest1._1
             } catch (IndexOutOfRangeException) { }
         }
 
-        /*private void lblTokens_Click(object sender, EventArgs e)
-        {
-            Label thisLabel = (Label)sender;
-            int row = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
-            int column = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
-            string hexTerrain = Convert.ToString(gameBoard.Hexes[row][column].Terrain);
-            Player.resourceType resource = (Player.resourceType)gameBoard.Hexes[row][column].Terrain - 1;
-            string strResource;
-            if (hexTerrain == "Desert")
-            {
-                strResource = "(none)";
-            } else
-            {
-                strResource = Convert.ToString(resource);
-            }
-            MessageBox.Show(String.Format("Hex {0}, {1} \nTerrain: {2} \nResource: {3}", 
-                row, column, hexTerrain, strResource));
-        }*/
-
         private void MoveThief_Click(object sender, EventArgs e)
         {
             Label thisLabel = (Label)sender;
@@ -860,60 +930,6 @@ namespace IntegrationTest1._1
             playerUI.Enabled = true;
         }
 
-        /*private void lblTokens_MouseHover(object sender, EventArgs e)
-        {
-            Label thisLabel = (Label)sender;
-            int i = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
-            int j = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
-            // show all the nodes neighboring this hex
-            if (i > lblTokens.GetUpperBound(0) / 2)
-            {
-                picNodes[(2 * i)][j + 1].Visible = true;
-            } else
-            {
-                picNodes[(2 * i)][j].Visible = true;
-            }
-            if (i >= lblTokens.GetUpperBound(0) / 2)
-            {
-                picNodes[(2 * i) + 3][j].Visible = true;
-            } else
-            {
-                picNodes[(2 * i) + 3][j + 1].Visible = true;
-            }
-            picNodes[(2 * i) + 1][j].Visible = true;
-            picNodes[(2 * i) + 1][j + 1].Visible = true;
-            picNodes[(2 * i) + 2][j].Visible = true;
-            picNodes[(2 * i) + 2][j + 1].Visible = true;
-        }
-
-        private void lblTokens_MouseLeave(object sender, EventArgs e)
-        {
-            Label thisLabel = (Label)sender;
-            int i = Convert.ToInt32(thisLabel.Name.Substring(5, 1));
-            int j = Convert.ToInt32(thisLabel.Name.Substring(7, 1));
-            // hide all the nodes neighboring this hex
-            if (i > lblTokens.GetUpperBound(0) / 2)
-            {
-                picNodes[(2 * i)][j + 1].Visible = false;
-            }
-            else
-            {
-                picNodes[(2 * i)][j].Visible = false;
-            }
-            if (i >= lblTokens.GetUpperBound(0) / 2)
-            {
-                picNodes[(2 * i) + 3][j].Visible = false;
-            }
-            else
-            {
-                picNodes[(2 * i) + 3][j + 1].Visible = false;
-            }
-            picNodes[(2 * i) + 1][j].Visible = false;
-            picNodes[(2 * i) + 1][j + 1].Visible = false;
-            picNodes[(2 * i) + 2][j].Visible = false;
-            picNodes[(2 * i) + 2][j + 1].Visible = false;
-        }*/
-
         private void HideNodes()
         {
             for (int i = 0; i <= picNodes.GetUpperBound(0); i++)
@@ -933,9 +949,21 @@ namespace IntegrationTest1._1
             }
         }
 
+        private void HideEdges()
+        {
+            for (int i = 0; i <= lblEdges.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= lblEdges[i].GetUpperBound(0); j++)
+                {
+                    lblEdges[i][j].Visible = false;
+                    lblEdges[i][j].Click -= SelectRoad_Click;
+                }
+            }
+        }
+
         private void playerUI_TradeP1_Click(object sender, EventArgs e)
         {
-            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            TradeScreen tradeScreen = new TradeScreen();
             tradeScreen.current = turn;
             tradeScreen.recipient = 0;
             tradeScreen.Show();
@@ -944,7 +972,7 @@ namespace IntegrationTest1._1
 
         private void playerUI_TradeP2_Click(object sender, EventArgs e)
         {
-            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            TradeScreen tradeScreen = new TradeScreen();
             tradeScreen.current = turn;
             tradeScreen.recipient = 1;
             tradeScreen.Show();
@@ -953,7 +981,7 @@ namespace IntegrationTest1._1
 
         private void playerUI_TradeP3_Click(object sender, EventArgs e)
         {
-            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            TradeScreen tradeScreen = new TradeScreen();
             tradeScreen.current = turn;
             tradeScreen.recipient = 2;
             tradeScreen.Show();
@@ -962,7 +990,7 @@ namespace IntegrationTest1._1
 
         private void playerUI_TradeP4_Click(object sender, EventArgs e)
         {
-            Forms.TradeScreen tradeScreen = new Forms.TradeScreen();
+            TradeScreen tradeScreen = new TradeScreen();
             tradeScreen.current = turn;
             tradeScreen.recipient = 3;
             tradeScreen.Show();
@@ -977,13 +1005,337 @@ namespace IntegrationTest1._1
                 MessageBox.Show("Not enough resources!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            /*if ("Dev Cards are gone")
+            cardDeck.DealCard(this, players[turn]);
+        }
+
+        private void playerUI_PlayDevCard_Click(object sender, EventArgs e)
+        {
+            DevCardScreen cardScreen = new DevCardScreen();
+            cardScreen.current = turn;            
+            cardScreen.Show();
+            playerUI.Enabled = false;
+        }
+
+        private bool RoadAdjacentRoads(int i, int j)
+        {
+            // return true as soon as an adjacent road is found
+            if (i % 2 == 0)     //Even row
             {
-                MessageBox.Show("86 Dev Cards!", "No", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }*/
-            MessageBox.Show("Dev Card Bought", "Test");
-            //players[turn].BuyDevCard();
+                try
+                {
+                    if (gameBoard.Edges[i][j - 1].Road != null && gameBoard.Edges[i][j - 1].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                } catch (IndexOutOfRangeException) { }
+                try
+                {
+                    if (gameBoard.Edges[i][j + 1].Road != null && gameBoard.Edges[i][j + 1].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                if (i < gameBoard.Edges.GetUpperBound(0) / 2) //Before halfway point
+                {
+                    try
+                    {
+                        if (gameBoard.Edges[i + 1][(j + 1) / 2].Road != null && 
+                            gameBoard.Edges[i + 1][(j + 1) / 2].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    try
+                    {
+                        if (gameBoard.Edges[i - 1][j / 2].Road != null &&
+                            gameBoard.Edges[i - 1][j / 2].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+                else  //After halfway point
+                {
+                    try
+                    {
+                        if (gameBoard.Edges[i + 1][j/ 2].Road != null && gameBoard.Edges[i + 1][j / 2].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    try
+                    {
+                        if (gameBoard.Edges[i - 1][(j + 1) / 2].Road != null &&
+                            gameBoard.Edges[i - 1][(j + 1) / 2].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+            }
+            else    //Odd Row
+            {
+                try
+                {
+                    if (gameBoard.Edges[i - 1][j * 2].Road != null && gameBoard.Edges[i - 1][j * 2].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                try
+                {
+                    if (gameBoard.Edges[i + 1][j * 2].Road != null && gameBoard.Edges[i + 1][j * 2].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                if (i <= gameBoard.Edges.GetUpperBound(0) / 2) //before or at halfway point
+                {
+                    try
+                    {
+                        if (gameBoard.Edges[i - 1][(j * 2) - 1].Road != null && 
+                            gameBoard.Edges[i - 1][(j * 2) - 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+                else //after halfway point
+                {
+                    try
+                    {
+                        if (gameBoard.Edges[i - 1][(j * 2) + 1].Road != null &&
+                            gameBoard.Edges[i - 1][(j * 2) + 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+                if (i < gameBoard.Edges.GetUpperBound(0) / 2) //before halfway point
+                {
+                    try
+                    {
+                        if (gameBoard.Edges[i + 1][(j * 2) + 1].Road != null &&
+                            gameBoard.Edges[i + 1][(j * 2) + 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+                else //after or at halfway point
+                {
+                    try
+                    {
+                        if (gameBoard.Edges[i + 1][(j * 2) - 1].Road != null &&
+                            gameBoard.Edges[i + 1][(j * 2) - 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+            }
+            return false;
+        }
+
+        private bool RoadAdjacentTowns(int i, int j)
+        {
+            if (i % 2 == 0)     //Even row
+            {
+                if (i < gameBoard.Edges.GetUpperBound(0) / 2) //Before halfway point
+                {
+                    if ((gameBoard.Nodes[i][j / 2].Town != null && gameBoard.Nodes[i][j / 2].Town.PlayerNum == turn) ||
+                    (gameBoard.Nodes[i + 1][(j + 1) / 2].Town != null && gameBoard.Nodes[i + 1][(j + 1) / 2].Town.PlayerNum == turn))
+                    {
+                        return true;
+                    }
+                }
+                else //After halfway point
+                {
+                    if ((gameBoard.Nodes[i][(j + 1) / 2].Town != null && gameBoard.Nodes[i][(j + 1) / 2].Town.PlayerNum == turn) ||
+                    (gameBoard.Nodes[i + 1][j / 2].Town != null && gameBoard.Nodes[i + 1][j / 2].Town.PlayerNum == turn))
+                    {
+                        return true;
+                    }
+                }
+            }
+            else    //Odd row
+            {
+                if ((gameBoard.Nodes[i][j].Town != null && gameBoard.Nodes[i][j].Town.PlayerNum == turn) ||
+                    (gameBoard.Nodes[i + 1][j].Town != null && gameBoard.Nodes[i + 1][j].Town.PlayerNum == turn))
+                {
+                    return true;
+                }
+            }
+                return false;
+        }
+
+        private bool TownAdjacentTowns(int i, int j)
+        {
+            try
+            {
+                if (gameBoard.Nodes[i + 1][j].Town != null)
+                {
+                    return true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[i - 1][j].Town != null)
+                {
+                    return true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (i % 2 == 1) //Odd row
+                {
+                    if (i < gameBoard.Nodes.Length / 2) //Before halfway point
+                    {
+                        if (gameBoard.Nodes[i - 1][j - 1].Town != null)
+                        {
+                            return true;
+                        }
+                    }
+                    else //After halfway point
+                    {
+                        if (gameBoard.Nodes[i - 1][j + 1].Town != null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else //Even row
+                {
+                    if (i < gameBoard.Nodes.Length / 2) //Before halfway point
+                    {
+                        if (gameBoard.Nodes[i + 1][j + 1].Town != null)
+                        {
+                            return true;
+                        }
+                    }
+                    else //After halfway point
+                    {
+                        if (gameBoard.Nodes[i + 1][j - 1].Town != null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            return false;
+        }
+
+        private bool TownAdjacentRoads(int i, int j)
+        {
+            if (i % 2 == 0) //Even row
+            {
+                // i - 1, j
+                try
+                {
+                    if (gameBoard.Edges[i - 1][j].Road != null && gameBoard.Edges[i - 1][j].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                // i, 2j
+                try
+                {
+                    if (gameBoard.Edges[i][j * 2].Road != null && gameBoard.Edges[i][j * 2].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                if (i < gameBoard.Nodes.Length / 2) //Before halfway point
+                {
+                    // i, 2j+1	
+                    try
+                    {
+                        if (gameBoard.Edges[i][(j * 2) + 1].Road != null && 
+                            gameBoard.Edges[i][(j * 2) + 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+                else //After halfway point
+                {
+                    // i, 2j-1
+                    try
+                    {
+                        if (gameBoard.Edges[i][(j * 2) - 1].Road != null && 
+                            gameBoard.Edges[i][(j * 2) - 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+            }
+            else //Odd row
+            {
+                // i, j
+                try
+                {
+                    if (gameBoard.Edges[i][j].Road != null && gameBoard.Edges[i][j].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                // i - 1, 2j
+                try
+                {
+                    if (gameBoard.Edges[i - 1][j * 2].Road != null && gameBoard.Edges[i - 1][j * 2].Road.PlayerNum == turn)
+                    {
+                        return true;
+                    }
+                }
+                catch (IndexOutOfRangeException) { }
+                if (i < gameBoard.Nodes.Length / 2) //Before halfway point
+                {
+                    // i-1, 2j-1
+                    try
+                    {
+                        if (gameBoard.Edges[i - 1][(j * 2) - 1].Road != null && 
+                            gameBoard.Edges[i - 1][(j * 2) - 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+                else //After halfway point
+                {
+                    // i-1,2j+1
+                    try
+                    {
+                        if (gameBoard.Edges[i - 1][(j * 2) + 1].Road != null && 
+                            gameBoard.Edges[i - 1][(j * 2) + 1].Road.PlayerNum == turn)
+                        {
+                            return true;
+                        }
+                    }
+                    catch (IndexOutOfRangeException) { }
+                }
+            }
+            return false;
         }
     }
 }
