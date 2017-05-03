@@ -37,8 +37,8 @@ namespace IntegrationTest1._1
         new Edge[] { null, null, null, null, null, null }}; //6
         private int[] tokenValues = {10, 2, 9, 12, 6, 4, 10, 9, 11, 3, 8, 8, 3, 4, 5, 5, 6, 11 };
         private static Random RNG = new Random();
-        private const float X_START_POINT = 250;
-        private const float Y_START_POINT = 250;
+        private const float X_START_POINT = 225;
+        private const float Y_START_POINT = 225;
 
         public Board()
         {

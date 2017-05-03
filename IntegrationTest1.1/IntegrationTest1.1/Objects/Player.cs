@@ -17,6 +17,7 @@ namespace IntegrationTest1._1
         private Color colour;
         private int victoryPts = 0;
         private int knightCt = 0;
+        //TEST: Set resources to 20
         private int lumberCt = 0, brickCt = 0, grainCt = 0, woolCt = 0, oreCt = 0; //Resources
         private int cityCt = 0, settlementCt = 0, roadCt = 0; //Buildings
         private int vpCardsPlayed = 0;
