@@ -43,3 +43,21 @@ C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\Inte
 C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe.manifest
 C:\Users\carthur22\Documents\Visual Studio 2015\Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.application
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csprojResolveAssemblyReference.cache
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.GameScreen.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.MainMenu.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.PlayerSelect.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.Properties.Resources.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csproj.GenerateResource.Cache
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.pdb
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe.config
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe.manifest
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.application
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.pdb
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe.manifest
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.application
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.DevCardScreen.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.DiceScreen.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.TradeScreen.resources
+C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csprojResolveAssemblyReference.cache
