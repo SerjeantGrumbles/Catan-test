@@ -241,8 +241,9 @@ namespace IntegrationTest1._1
                 players[0].Name));
             lblRoundCount.Visible = true;
             lblRoundCount.Text = "Round 1";
-            // For testing purposes, Roll Dice button enabled from the start
-            //btnRoll.Enabled = true;
+            // For testing purposes, Roll Dice button enabled from the start and play dev card visible
+            /*btnRoll.Enabled = true;
+            playerUI_PlayDevCard.Visible = true;*/
         }
 
         private void playerUI_EndTurn_Click(object sender, EventArgs e)
@@ -287,8 +288,6 @@ namespace IntegrationTest1._1
                         MessageBox.Show(String.Format("{0}, it is now your turn.", players[turn].Name));
                         round += 1;
                         lblRoundCount.Text = String.Format("Round {0}", round);
-                        //playerUI_BuildRoad.Enabled = true;
-                        //playerUI_BuildCity.Enabled = true;
                         btnRoll.Enabled = true;
                         playerUI_TradeP2.Visible = true;
                         playerUI_TradeP3.Visible = true;
@@ -387,7 +386,8 @@ namespace IntegrationTest1._1
                         if (TownAdjacentTowns(i, j))
                         {
                             continue;
-                        }                                               
+                        }
+                        //TEST: comment out this from the "if" statement                                               
                         if (round < 3 || TownAdjacentRoads(i, j))
                         {
                             picNodes[i][j].Visible = true;

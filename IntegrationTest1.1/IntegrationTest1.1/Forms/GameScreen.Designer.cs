@@ -38,6 +38,7 @@
             this.lblPlayer3 = new System.Windows.Forms.Label();
             this.lblPlayer2 = new System.Windows.Forms.Label();
             this.playerUI = new System.Windows.Forms.GroupBox();
+            this.playerUI_PlayDevCard = new System.Windows.Forms.Button();
             this.picBuildCosts = new System.Windows.Forms.PictureBox();
             this.playerUI_TradeP2 = new System.Windows.Forms.Button();
             this.playerUI_DiceResult = new System.Windows.Forms.TextBox();
@@ -77,10 +78,9 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.lblRoundCount = new System.Windows.Forms.Label();
-            this.playerUI_PlayDevCard = new System.Windows.Forms.Button();
             this.victoryPanel = new System.Windows.Forms.Panel();
-            this.lblVictorHeading = new System.Windows.Forms.Label();
             this.lblPlayerVictor = new System.Windows.Forms.Label();
+            this.lblVictorHeading = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picDice1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDice2)).BeginInit();
             this.playerPanel.SuspendLayout();
@@ -241,6 +241,18 @@
             this.playerUI.TabStop = false;
             this.playerUI.Text = "(Player)";
             this.playerUI.Visible = false;
+            // 
+            // playerUI_PlayDevCard
+            // 
+            this.playerUI_PlayDevCard.ForeColor = System.Drawing.Color.Black;
+            this.playerUI_PlayDevCard.Location = new System.Drawing.Point(26, 245);
+            this.playerUI_PlayDevCard.Name = "playerUI_PlayDevCard";
+            this.playerUI_PlayDevCard.Size = new System.Drawing.Size(163, 23);
+            this.playerUI_PlayDevCard.TabIndex = 75;
+            this.playerUI_PlayDevCard.Text = "Play Development Card";
+            this.playerUI_PlayDevCard.UseVisualStyleBackColor = true;
+            this.playerUI_PlayDevCard.Visible = false;
+            this.playerUI_PlayDevCard.Click += new System.EventHandler(this.playerUI_PlayDevCard_Click);
             // 
             // picBuildCosts
             // 
@@ -607,7 +619,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(353, 843);
+            this.btnStart.Location = new System.Drawing.Point(357, 804);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(109, 23);
             this.btnStart.TabIndex = 72;
@@ -618,7 +630,7 @@
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Copperplate Gothic Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(468, 843);
+            this.btnReset.Location = new System.Drawing.Point(472, 804);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 23);
             this.btnReset.TabIndex = 73;
@@ -639,18 +651,6 @@
             this.lblRoundCount.Text = "(Round)";
             this.lblRoundCount.Visible = false;
             // 
-            // playerUI_PlayDevCard
-            // 
-            this.playerUI_PlayDevCard.ForeColor = System.Drawing.Color.Black;
-            this.playerUI_PlayDevCard.Location = new System.Drawing.Point(26, 245);
-            this.playerUI_PlayDevCard.Name = "playerUI_PlayDevCard";
-            this.playerUI_PlayDevCard.Size = new System.Drawing.Size(163, 23);
-            this.playerUI_PlayDevCard.TabIndex = 75;
-            this.playerUI_PlayDevCard.Text = "Play Development Card";
-            this.playerUI_PlayDevCard.UseVisualStyleBackColor = true;
-            this.playerUI_PlayDevCard.Visible = false;
-            this.playerUI_PlayDevCard.Click += new System.EventHandler(this.playerUI_PlayDevCard_Click);
-            // 
             // victoryPanel
             // 
             this.victoryPanel.BackColor = System.Drawing.Color.Maroon;
@@ -663,17 +663,6 @@
             this.victoryPanel.TabIndex = 23;
             this.victoryPanel.Visible = false;
             // 
-            // lblVictorHeading
-            // 
-            this.lblVictorHeading.BackColor = System.Drawing.Color.Transparent;
-            this.lblVictorHeading.Font = new System.Drawing.Font("Copperplate Gothic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVictorHeading.ForeColor = System.Drawing.Color.Gold;
-            this.lblVictorHeading.Location = new System.Drawing.Point(49, 9);
-            this.lblVictorHeading.Name = "lblVictorHeading";
-            this.lblVictorHeading.Size = new System.Drawing.Size(183, 25);
-            this.lblVictorHeading.TabIndex = 22;
-            this.lblVictorHeading.Text = "Winner:";
-            // 
             // lblPlayerVictor
             // 
             this.lblPlayerVictor.BackColor = System.Drawing.Color.Transparent;
@@ -685,12 +674,23 @@
             this.lblPlayerVictor.TabIndex = 23;
             this.lblPlayerVictor.Text = "(Player Winner)";
             // 
+            // lblVictorHeading
+            // 
+            this.lblVictorHeading.BackColor = System.Drawing.Color.Transparent;
+            this.lblVictorHeading.Font = new System.Drawing.Font("Copperplate Gothic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVictorHeading.ForeColor = System.Drawing.Color.Gold;
+            this.lblVictorHeading.Location = new System.Drawing.Point(49, 9);
+            this.lblVictorHeading.Name = "lblVictorHeading";
+            this.lblVictorHeading.Size = new System.Drawing.Size(183, 25);
+            this.lblVictorHeading.TabIndex = 22;
+            this.lblVictorHeading.Text = "Winner:";
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::IntegrationTest1._1.Properties.Resources.Sea;
-            this.ClientSize = new System.Drawing.Size(1103, 921);
+            this.ClientSize = new System.Drawing.Size(1103, 865);
             this.Controls.Add(this.victoryPanel);
             this.Controls.Add(this.lblRoundCount);
             this.Controls.Add(this.btnStart);
