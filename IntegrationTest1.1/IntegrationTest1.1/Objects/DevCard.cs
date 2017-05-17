@@ -47,6 +47,7 @@ namespace IntegrationTest1._1
             {
                 g.picLargestArmy.Image = null;
             }
+            g.ActivateThief();
         }
     }
 

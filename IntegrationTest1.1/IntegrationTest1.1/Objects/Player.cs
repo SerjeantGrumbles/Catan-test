@@ -92,6 +92,11 @@ namespace IntegrationTest1._1
             get { return cityCt; }
         }
 
+        public int TotalResources
+        {
+            get { return lumberCt + brickCt + grainCt + woolCt + oreCt; }
+        }
+
         public int SettlementCount
         {
             get { return settlementCt; }
@@ -143,6 +148,9 @@ namespace IntegrationTest1._1
             {
                 g.picLargestArmy.Image = null;
             }
+
+            g.lblTurn.ForeColor = Colour;
+            g.lblTurn.Text = Name + "'s Turn";
         }
 
         public void BuildInitialSettlement(GameScreen g)
@@ -266,12 +274,12 @@ namespace IntegrationTest1._1
 
         public void DepleteResources()
         {
-            int totalResources = BrickCount + GrainCount + LumberCount + OreCount + WoolCount;
-            if (totalResources > 7)
+            if (TotalResources > 7)
             {
+                int target = TotalResources / 2;
                 int counter = 1;
                 Random RNG = new Random();
-                while (counter <= totalResources / 2)
+                while (counter <= target)
                 {
                     resourceType resourceEnum = (resourceType)RNG.Next(5);
                     switch (resourceEnum)
@@ -323,22 +331,27 @@ namespace IntegrationTest1._1
             switch (myResource){
                 case resourceType.Lumber:
                     lumberCt -= myAmt;
+                    recipient.lumberCt += myAmt;
                     g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
                     break;
                 case resourceType.Grain:                    
                     grainCt -= myAmt;
+                    recipient.grainCt += myAmt;
                     g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
                     break;
                 case resourceType.Wool:                 
                     woolCt -= myAmt;
+                    recipient.woolCt += myAmt;
                     g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
                     break;
                 case resourceType.Ore:                    
                     oreCt -= myAmt;
+                    recipient.oreCt += myAmt;
                     g.playerUI_OreCount.Text = Convert.ToString(OreCount);
                     break;
                 case resourceType.Brick:
                     brickCt -= myAmt;
+                    recipient.brickCt += myAmt;
                     g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
                     break;
             }
@@ -346,69 +359,99 @@ namespace IntegrationTest1._1
             switch (theirResource)
             {
                 case resourceType.Lumber:
-                    lumberCt += myAmt;
+                    lumberCt += theirAmt;
+                    recipient.lumberCt -= theirAmt;
                     g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
                     break;
                 case resourceType.Grain:
-                    grainCt += myAmt;
+                    grainCt += theirAmt;
+                    recipient.grainCt -= theirAmt;
                     g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
                     break;
                 case resourceType.Wool:
-                    woolCt += myAmt;
+                    woolCt += theirAmt;
+                    recipient.woolCt -= theirAmt;
                     g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
                     break;
                 case resourceType.Ore:
-                    oreCt += myAmt;
+                    oreCt += theirAmt;
+                    recipient.oreCt -= theirAmt;
                     g.playerUI_OreCount.Text = Convert.ToString(OreCount);
                     break;
                 case resourceType.Brick:
-                    brickCt += myAmt;
+                    brickCt += theirAmt;
+                    recipient.brickCt -= theirAmt;
                     g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
                     break;
             }
-            recipient.ReceiveTrade(theirResource, theirAmt, myResource, myAmt);
+            //recipient.ReceiveTrade(theirResource, theirAmt, myResource, myAmt);
         }
 
-        private void ReceiveTrade(resourceType myResource, int myAmt, resourceType theirResource, int theirAmt)
+        public void StealResource(GameScreen g, Player p)
         {
-            // Resource the recipient player is giving
-            switch (myResource)
+            if (p.TotalResources < 1)
             {
-                case resourceType.Lumber:
-                    lumberCt -= myAmt;
-                    break;
-                case resourceType.Grain:
-                    grainCt -= myAmt;
-                    break;
-                case resourceType.Wool:
-                    woolCt -= myAmt;
-                    break;
-                case resourceType.Ore:
-                    oreCt -= myAmt;
-                    break;
-                case resourceType.Brick:
-                    brickCt -= myAmt;
-                    break;
+                MessageBox.Show("The thief has returned empty handed!", "No resources to steal",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            // Resource the recipient player is receiving
-            switch (theirResource)
+            Random RNG = new Random();
+            bool stolen = false;
+            resourceType resourceEnum = resourceType.Lumber;
+            while (stolen == false)
             {
-                case resourceType.Lumber:
-                    lumberCt += myAmt;
-                    break;
-                case resourceType.Grain:
-                    grainCt += myAmt;
-                    break;
-                case resourceType.Wool:
-                    woolCt += myAmt;
-                    break;
-                case resourceType.Ore:
-                    oreCt += myAmt;
-                    break;
-                case resourceType.Brick:
-                    brickCt += myAmt;
-                    break;
+                resourceEnum = (resourceType)RNG.Next(5);
+                switch (resourceEnum)
+                {
+                    case resourceType.Lumber:
+                        if (p.LumberCount > 0)
+                        {
+                            lumberCt += 1;
+                            p.lumberCt -= 1;
+                            g.playerUI_LumberCount.Text = Convert.ToString(LumberCount);
+                            stolen = true;                            
+                        }
+                        break;
+                    case resourceType.Grain:
+                        if (p.GrainCount > 0)
+                        {
+                            grainCt += 1;
+                            p.grainCt -= 1;
+                            g.playerUI_GrainCount.Text = Convert.ToString(GrainCount);
+                            stolen = true;
+                        }
+                        break;
+                    case resourceType.Wool:
+                        if (p.WoolCount > 0)
+                        {
+                            woolCt += 1;
+                            p.woolCt -= 1;
+                            g.playerUI_WoolCount.Text = Convert.ToString(WoolCount);
+                            stolen = true;
+                        }
+                        break;
+                    case resourceType.Ore:
+                        if (p.OreCount > 0)
+                        {
+                            oreCt += 1;
+                            p.oreCt -= 1;
+                            g.playerUI_OreCount.Text = Convert.ToString(OreCount);
+                            stolen = true;
+                        }
+                        break;
+                    case resourceType.Brick:
+                        if (p.BrickCount > 0)
+                        {
+                            brickCt += 1;
+                            p.brickCt -= 1;
+                            g.playerUI_BrickCount.Text = Convert.ToString(BrickCount);
+                            stolen = true;
+                        }
+                        break;
+                }
             }
+            MessageBox.Show(String.Format("You have stolen {0} from {1}", resourceEnum, p.Name),"Theft successful!",
+                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                
         }
 
         public void AddKnight()
