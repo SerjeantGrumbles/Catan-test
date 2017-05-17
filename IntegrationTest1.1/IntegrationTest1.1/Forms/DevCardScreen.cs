@@ -52,9 +52,9 @@ namespace IntegrationTest1._1
         private void btnPlay_Click(object sender, EventArgs e)
         {
             DevCard currentCard = (DevCard)lstDevCards.SelectedItem;
+            this.Close();
             currentCard.Play(gameScreen, gameScreen.players[current]);
             gameScreen.players[current].DevCards.Remove(currentCard);
-            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

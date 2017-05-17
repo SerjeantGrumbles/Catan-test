@@ -57,6 +57,7 @@ namespace IntegrationTest1._1
             InitializePlayerUI();
         }
 
+        //Draws the hex tiles on the screen, as well as whatever roads exist
         private void GameScreen_Paint(object Sender, PaintEventArgs e)
         {
             Bitmap[][] hexImages = new Bitmap[][] { new Bitmap[] { null, null, null },
@@ -105,7 +106,7 @@ namespace IntegrationTest1._1
                     formGraphics.Dispose();
                 }
             }
-        } // end GameScreen_Paint
+        }
 
         private void GenerateTokens()
         {
@@ -115,28 +116,28 @@ namespace IntegrationTest1._1
                 {
                     lblTokens[i][j] = new Label();
                     lblTokens[i][j].AutoSize = false;
-                    lblTokens[i][j].BackColor = System.Drawing.Color.DarkKhaki;
-                    lblTokens[i][j].Location = new System.Drawing.Point((int)gameBoard.Hexes[i][j].MidpointX - 10,
+                    lblTokens[i][j].BackColor = Color.DarkKhaki;
+                    lblTokens[i][j].Location = new Point((int)gameBoard.Hexes[i][j].MidpointX - 10,
                         (int)gameBoard.Hexes[i][j].MidpointY - 10);
-                    lblTokens[i][j].Font = new System.Drawing.Font("Copperplate Gothic Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    lblTokens[i][j].Font = new Font("Copperplate Gothic Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     lblTokens[i][j].Name = "token" + i + "_" + j;
                     if (gameBoard.Hexes[i][j].Thief)
                     {
-                        lblTokens[i][j].Size = new System.Drawing.Size(32, 32);
+                        lblTokens[i][j].Size = new Size(32, 32);
                         lblTokens[i][j].Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
                         thRow = i;
                         thCol = j;
                     } else
                     {
-                        lblTokens[i][j].Size = new System.Drawing.Size(30, 25);
+                        lblTokens[i][j].Size = new Size(30, 25);
                     }                   
-                    lblTokens[i][j].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                    lblTokens[i][j].TextAlign = ContentAlignment.MiddleCenter;
                     lblTokens[i][j].Text = gameBoard.GetToken(i, j);
                     Controls.Add(lblTokens[i][j]);
 
                 }
             }
-        } // end GenerateTokens()
+        }
 
         private void GenerateNodes()
         {
@@ -145,11 +146,11 @@ namespace IntegrationTest1._1
                 for (int j = 0; j <= picNodes[i].GetUpperBound(0); j++)
                 {
                     picNodes[i][j] = new PictureBox();
-                    picNodes[i][j].Cursor = System.Windows.Forms.Cursors.Hand;
-                    picNodes[i][j].Location = new System.Drawing.Point((int)gameBoard.Nodes[i][j].LocationX, 
+                    picNodes[i][j].Cursor = Cursors.Hand;
+                    picNodes[i][j].Location = new Point((int)gameBoard.Nodes[i][j].LocationX, 
                         (int)gameBoard.Nodes[i][j].LocationY);
                     picNodes[i][j].Name = "node" + i + "_" + j;
-                    picNodes[i][j].Size = new System.Drawing.Size(10, 10);
+                    picNodes[i][j].Size = new Size(10, 10);
                     picNodes[i][j].TabStop = false;
                     picNodes[i][j].Visible = false;
                     picNodes[i][j].SizeMode = PictureBoxSizeMode.StretchImage;
@@ -178,6 +179,7 @@ namespace IntegrationTest1._1
             }
         }
 
+        //erase tokens whenever the game is reset
         private void EraseTokens()
         {
             for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
@@ -189,6 +191,7 @@ namespace IntegrationTest1._1
             }
         }
 
+        //erase nodes whenever the game is reset
         private void EraseNodes()
         {
             for (int i = 0; i <= picNodes.GetUpperBound(0); i++)
@@ -239,7 +242,7 @@ namespace IntegrationTest1._1
             players[0].StartTurn(this);
             MessageBox.Show(String.Format("The game has begun.  {0}, build your first settlement and road.",
                 players[0].Name));
-            lblRoundCount.Visible = true;
+            turnPanel.Visible = true;
             lblRoundCount.Text = "Round 1";
             // For testing purposes, Roll Dice button enabled from the start and play dev card visible
             /*btnRoll.Enabled = true;
@@ -285,6 +288,19 @@ namespace IntegrationTest1._1
                     {
                         nextTurn = turn;
                         MessageBox.Show("End of round 2.  Initial settlements and roads are in place, and the game can truly begin.");
+                        // distribute initial resources for first two settlements
+                        MessageBox.Show("Players now harvest resources from their two starting settlements");
+                        for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
+                        {
+                            for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
+                            {
+
+                                if (gameBoard.Hexes[i][j].Thief == false)
+                                {
+                                    DistributeResources(gameBoard.Hexes[i][j], i, j);
+                                }
+                            }
+                        }
                         MessageBox.Show(String.Format("{0}, it is now your turn.", players[turn].Name));
                         round += 1;
                         lblRoundCount.Text = String.Format("Round {0}", round);
@@ -387,7 +403,7 @@ namespace IntegrationTest1._1
                         {
                             continue;
                         }
-                        //TEST: comment out this from the "if" statement                                               
+                        //TEST: comment this out from the "if" statement                                               
                         if (round < 3 || TownAdjacentRoads(i, j))
                         {
                             picNodes[i][j].Visible = true;
@@ -521,7 +537,7 @@ namespace IntegrationTest1._1
             playerUI.Visible = false;
             picDice1.Visible = false;
             picDice2.Visible = false;
-            lblRoundCount.Visible = false;
+            turnPanel.Visible = false;
             victoryPanel.Visible = false;
             btnStart.Visible = true;
             btnRoll.Enabled = false;
@@ -767,25 +783,14 @@ namespace IntegrationTest1._1
             playerUI_DiceResult.Text = Convert.ToString(dice.DiceTotal);
             if (dice.DiceTotal == 7)
             {
-                MessageBox.Show("You rolled 7!  All players with over seven total resources lose half." +
-                    "\n" + "Click on one of the tokens to move the thief to a different tile.", "Dice rolled", 
+                MessageBox.Show("You rolled 7!  All players with over seven total resources lose half.",
+                "Dice rolled", 
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 for (int i = 0; i <= players.GetUpperBound(0); i++)
                 {
                     players[i].DepleteResources();
                 }
-                for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
-                {
-                    for (int j = 0; j <= lblTokens[i].GetUpperBound(0); j++)
-                    {
-                        if (gameBoard.Hexes[i][j].Thief == false)
-                        {
-                            lblTokens[i][j].Click += new EventHandler(MoveThief_Click);
-                            lblTokens[i][j].Cursor = Cursors.Hand;
-                        }
-                    }
-                }
-                playerUI.Enabled = false;
+                ActivateThief();
             }
             else
             {
@@ -809,6 +814,7 @@ namespace IntegrationTest1._1
             playerUI_OreCount.Text = Convert.ToString(players[turn].OreCount);
             playerUI_WoolCount.Text = Convert.ToString(players[turn].WoolCount);
 
+            //For testing purposes, keep btnRoll enabled
             btnRoll.Enabled = false;
             playerUI_BuildSettlement.Enabled = true;
             playerUI_BuildCity.Enabled = true;
@@ -837,7 +843,8 @@ namespace IntegrationTest1._1
                     currentSettlement = gameBoard.Nodes[(2 * i)][j].Town;
                     players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
                 }
-            } catch (IndexOutOfRangeException) { }
+            }
+            catch (IndexOutOfRangeException) { }
             try
             {
                 if (i >= gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i) + 3][j].Town != null)
@@ -850,7 +857,8 @@ namespace IntegrationTest1._1
                     currentSettlement = gameBoard.Nodes[(2 * i) + 3][j + 1].Town;
                     players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
                 }
-            } catch (IndexOutOfRangeException) { }
+            }
+            catch (IndexOutOfRangeException) { }
             try
             {
                 if (gameBoard.Nodes[(2 * i) + 1][j].Town != null)
@@ -858,33 +866,59 @@ namespace IntegrationTest1._1
                     currentSettlement = gameBoard.Nodes[(2 * i) + 1][j].Town;
                     players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
                 }
-            } catch (IndexOutOfRangeException) { }
+            }
+            catch (IndexOutOfRangeException) { }
             try
             {
                 if (gameBoard.Nodes[(2 * i) + 1][j + 1].Town != null)
                 {
-                currentSettlement = gameBoard.Nodes[(2 * i) + 1][j + 1].Town;
-                players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                    currentSettlement = gameBoard.Nodes[(2 * i) + 1][j + 1].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
                 }
-            } catch (IndexOutOfRangeException) { }
+            }
+            catch (IndexOutOfRangeException) { }
             try
             {
                 if (gameBoard.Nodes[(2 * i) + 2][j].Town != null)
                 {
-                currentSettlement = gameBoard.Nodes[(2 * i) + 2][j].Town;
-                players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                    currentSettlement = gameBoard.Nodes[(2 * i) + 2][j].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
                 }
-            } catch (IndexOutOfRangeException) { }
+            }
+            catch (IndexOutOfRangeException) { }
             try
             {
                 if (gameBoard.Nodes[(2 * i) + 2][j + 1].Town != null)
                 {
-                currentSettlement = gameBoard.Nodes[(2 * i) + 2][j + 1].Town;
-                players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
+                    currentSettlement = gameBoard.Nodes[(2 * i) + 2][j + 1].Town;
+                    players[currentSettlement.PlayerNum].HarvestResources(h, currentSettlement);
                 }
-            } catch (IndexOutOfRangeException) { }
+            }
+            catch (IndexOutOfRangeException) { }
+        }
+        
+        //create event handlers to move thief to a new tile
+        public void ActivateThief()
+        {
+            MessageBox.Show("Click on one of the tokens to move the thief to a different tile.", "Thief activated!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= lblTokens[i].GetUpperBound(0); j++)
+                {
+                    if (gameBoard.Hexes[i][j].Thief == false)
+                    {
+                        lblTokens[i][j].Click += new EventHandler(MoveThief_Click);
+                        lblTokens[i][j].Cursor = Cursors.Hand;
+                        lblTokens[i][j].BackColor = players[turn].Colour;
+                        lblTokens[i][j].ForeColor = Color.Gold;
+                    }
+                }
+            }
+            playerUI.Enabled = false;
         }
 
+        //Select new tile to move thief
         private void MoveThief_Click(object sender, EventArgs e)
         {
             Label thisLabel = (Label)sender;
@@ -896,40 +930,262 @@ namespace IntegrationTest1._1
             //restore previous thief token to its normal state
             if (gameBoard.Hexes[thRow][thCol].Terrain == Hex.terrainType.Desert)
             {
-                lblTokens[thRow][thCol].Size = new System.Drawing.Size(0, 0);
+                lblTokens[thRow][thCol].Size = new Size(0, 0);
             }
             else
             {
-                lblTokens[thRow][thCol].Size = new System.Drawing.Size(30, 25);
+                lblTokens[thRow][thCol].Size = new Size(30, 25);
                 lblTokens[thRow][thCol].Text = gameBoard.GetToken(thRow, thCol);
             }
             lblTokens[thRow][thCol].Image = null;
 
-            //change destination token to thief state
-            thisLabel.Size = new System.Drawing.Size(32, 32);
-            thisLabel.Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
-            thisLabel.Text = "";
-            
+            // update thief token index
+            thRow = row;
+            thCol = column;
 
             //remove event handlers
             for (int i = 0; i <= lblTokens.GetUpperBound(0); i++)
             {
                 for (int j = 0; j <= lblTokens[i].GetUpperBound(0); j++)
                 {
+                    lblTokens[i][j].Click -= MoveThief_Click;
+                    lblTokens[i][j].Cursor = Cursors.Default;
                     if (i != thRow || j != thCol)
                     {
-                        lblTokens[i][j].Click -= MoveThief_Click;
-                        lblTokens[i][j].Cursor = Cursors.Default;
+                        lblTokens[i][j].BackColor = Color.DarkKhaki;
+                        lblTokens[i][j].ForeColor = Color.Black;
                     }
                 }
             }
-            // update thief token index
-            thRow = row;
-            thCol = column;
+
+            ActivateRobPlayer();
+        }
+
+        //create event handlers for neighboring settlements/cities of the newly occupied thief tile
+        private void ActivateRobPlayer()
+        {
+            int i = thRow;
+            int j = thCol;
+            bool adjacentPlayers = false;
+            try
+            {
+                if (i > gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i)][j + 1].Town != null && 
+                    gameBoard.Nodes[(2 * i)][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i)][j + 1].Enabled = true;
+                    picNodes[(2 * i)][j + 1].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i)][j + 1].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+                else if (gameBoard.Nodes[(2 * i)][j].Town != null && gameBoard.Nodes[(2 * i)][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i)][j].Enabled = true;
+                    picNodes[(2 * i)][j].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i)][j].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (i >= gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i) + 3][j].Town != null &&
+                    gameBoard.Nodes[(2 * i) + 3][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 3][j].Enabled = true;
+                    picNodes[(2 * i) + 3][j].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i) + 3][j].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+                else if (gameBoard.Nodes[(2 * i) + 3][j + 1].Town != null && 
+                    gameBoard.Nodes[(2 * i) + 3][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 3][j + 1].Enabled = true;
+                    picNodes[(2 * i) + 3][j + 1].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i) + 3][j + 1].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 1][j].Town != null && gameBoard.Nodes[(2 * i) + 1][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 1][j].Enabled = true;
+                    picNodes[(2 * i) + 1][j].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i) + 1][j].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 1][j + 1].Town != null && 
+                    gameBoard.Nodes[(2 * i) + 1][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 1][j + 1].Enabled = true;
+                    picNodes[(2 * i) + 1][j + 1].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i) + 1][j + 1].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 2][j].Town != null && gameBoard.Nodes[(2 * i) + 2][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 2][j].Enabled = true;
+                    picNodes[(2 * i) + 2][j].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i) + 2][j].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 2][j + 1].Town != null && 
+                    gameBoard.Nodes[(2 * i) + 2][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 2][j + 1].Enabled = true;
+                    picNodes[(2 * i) + 2][j + 1].Click += new EventHandler(RobPlayer_Click);
+                    picNodes[(2 * i) + 2][j + 1].Cursor = Cursors.Hand;
+                    adjacentPlayers = true;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            if (adjacentPlayers == false)
+            {
+                MessageBox.Show("There are no neighboring players to rob!");
+                //change thief-occupied token to thief state
+                lblTokens[thRow][thCol].Size = new Size(32, 32);
+                lblTokens[thRow][thCol].Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
+                lblTokens[thRow][thCol].Text = "";
+                lblTokens[thRow][thCol].BackColor = Color.DarkKhaki;
+                lblTokens[thRow][thCol].ForeColor = Color.Black;
+
+                playerUI.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Click a neighboring settlement/city to rob that corresponding player");
+            }
+        }
+
+        //Select player to rob by clicking his/her settlement/city
+        private void RobPlayer_Click(object sender, EventArgs e)
+        {
+            int i;
+            int j;
+            PictureBox thisNode = (PictureBox)sender;
+            if (thisNode.Name.Length == 7)
+            {
+                i = Convert.ToInt32(thisNode.Name.Substring(4, 1));
+                j = Convert.ToInt32(thisNode.Name.Substring(6, 1));
+            }
+            else
+            {
+                i = Convert.ToInt32(thisNode.Name.Substring(4, 2));
+                j = Convert.ToInt32(thisNode.Name.Substring(7, 1));
+            }
+            int pIndex = gameBoard.Nodes[i][j].Town.PlayerNum;
+            players[turn].StealResource(this, players[pIndex]);
+
+            DeactivateRobPlayer();
+
+            //change thief-occupied token to thief state
+            lblTokens[thRow][thCol].Size = new Size(32, 32);
+            lblTokens[thRow][thCol].Image = (Image)Resources.ResourceManager.GetObject("thiefIcon");
+            lblTokens[thRow][thCol].Text = "";
+            lblTokens[thRow][thCol].BackColor = Color.DarkKhaki;
+            lblTokens[thRow][thCol].ForeColor = Color.Black;
 
             playerUI.Enabled = true;
         }
 
+        //Remove rob player event handlers from settlement/city nodes
+        private void DeactivateRobPlayer()
+        {
+            int i = thRow;
+            int j = thCol;
+            try
+            {
+                if (i > gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i)][j + 1].Town != null &&
+                    gameBoard.Nodes[(2 * i)][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i)][j + 1].Enabled = false;
+                    picNodes[(2 * i)][j + 1].Click -= RobPlayer_Click;
+                    picNodes[(2 * i)][j + 1].Cursor = Cursors.Default;
+                }
+                else if (gameBoard.Nodes[(2 * i)][j].Town != null && gameBoard.Nodes[(2 * i)][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i)][j].Enabled = false;
+                    picNodes[(2 * i)][j].Click -= RobPlayer_Click;
+                    picNodes[(2 * i)][j].Cursor = Cursors.Default;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (i >= gameBoard.Hexes.GetUpperBound(0) / 2 && gameBoard.Nodes[(2 * i) + 3][j].Town != null &&
+                    gameBoard.Nodes[(2 * i) + 3][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 3][j].Enabled = false;
+                    picNodes[(2 * i) + 3][j].Click -= RobPlayer_Click;
+                    picNodes[(2 * i) + 3][j].Cursor = Cursors.Default;
+                }
+                else if (gameBoard.Nodes[(2 * i) + 3][j + 1].Town != null &&
+                    gameBoard.Nodes[(2 * i) + 3][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 3][j + 1].Enabled = false;
+                    picNodes[(2 * i) + 3][j + 1].Click -= RobPlayer_Click;
+                    picNodes[(2 * i) + 3][j + 1].Cursor = Cursors.Default;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 1][j].Town != null && gameBoard.Nodes[(2 * i) + 1][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 1][j].Enabled = false;
+                    picNodes[(2 * i) + 1][j].Click -= RobPlayer_Click;
+                    picNodes[(2 * i) + 1][j].Cursor = Cursors.Default;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 1][j + 1].Town != null &&
+                    gameBoard.Nodes[(2 * i) + 1][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 1][j + 1].Enabled = false;
+                    picNodes[(2 * i) + 1][j + 1].Click -= RobPlayer_Click;
+                    picNodes[(2 * i) + 1][j + 1].Cursor = Cursors.Default;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 2][j].Town != null && gameBoard.Nodes[(2 * i) + 2][j].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 2][j].Enabled = false;
+                    picNodes[(2 * i) + 2][j].Click -= RobPlayer_Click;
+                    picNodes[(2 * i) + 2][j].Cursor = Cursors.Default;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+            try
+            {
+                if (gameBoard.Nodes[(2 * i) + 2][j + 1].Town != null &&
+                    gameBoard.Nodes[(2 * i) + 2][j + 1].Town.PlayerNum != turn)
+                {
+                    picNodes[(2 * i) + 2][j + 1].Enabled = false;
+                    picNodes[(2 * i) + 2][j + 1].Click -= RobPlayer_Click;
+                    picNodes[(2 * i) + 2][j + 1].Cursor = Cursors.Default;
+                }
+            }
+            catch (IndexOutOfRangeException) { }
+        }
+
+        //Remove the create settlement/city event handlers from nodes and hide all that are unsettled
         private void HideNodes()
         {
             for (int i = 0; i <= picNodes.GetUpperBound(0); i++)
@@ -949,6 +1205,7 @@ namespace IntegrationTest1._1
             }
         }
 
+        //Remove the creat road event handlers and hide the "buttons"
         private void HideEdges()
         {
             for (int i = 0; i <= lblEdges.GetUpperBound(0); i++)
@@ -1337,5 +1594,34 @@ namespace IntegrationTest1._1
             }
             return false;
         }
+
+        //Implements quick tests using Button btnTest and NumericUpDown updTest (both dummied out)
+        /*private void btnTest_Click(object sender, EventArgs e)
+        {
+            if (updTest.Value == 7)
+            {
+                ActivateThief();
+            } 
+            else
+            {
+                for (int i = 0; i <= gameBoard.Hexes.GetUpperBound(0); i++)
+                {
+                    for (int j = 0; j <= gameBoard.Hexes[i].GetUpperBound(0); j++)
+                    {
+
+                        if (gameBoard.Hexes[i][j].Token == updTest.Value &&
+                            gameBoard.Hexes[i][j].Thief == false)
+                        {
+                            DistributeResources(gameBoard.Hexes[i][j], i, j);
+                        }
+                    }
+                }
+                playerUI_BrickCount.Text = Convert.ToString(players[turn].BrickCount);
+                playerUI_GrainCount.Text = Convert.ToString(players[turn].GrainCount);
+                playerUI_LumberCount.Text = Convert.ToString(players[turn].LumberCount);
+                playerUI_OreCount.Text = Convert.ToString(players[turn].OreCount);
+                playerUI_WoolCount.Text = Convert.ToString(players[turn].WoolCount);
+            }            
+        }*/
     }
 }
