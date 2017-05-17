@@ -1,0 +1,9 @@
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/.NETFramework,Version=v4.5.2.AssemblyAttribute.cs
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.DevCardScreen.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.DiceScreen.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.GameScreen.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.MainMenu.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.PlayerSelect.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.TradeScreen.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1._1.Properties.Resources.resources
+/media/conrad/38A3-75C6/SDEV265/Catan-test-master/IntegrationTest1.1/IntegrationTest1.1/obj/Debug/IntegrationTest1.1.exe

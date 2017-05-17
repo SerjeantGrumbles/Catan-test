@@ -61,3 +61,6 @@ C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\Integ
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.DiceScreen.resources
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1._1.TradeScreen.resources
 C:\Users\Conrad\Documents\Class Folders\SDEV265-Projects\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.csprojResolveAssemblyReference.cache
+E:\SDEV265\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\bin\Debug\IntegrationTest1.1.exe.config
+E:\SDEV265\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.exe
+E:\SDEV265\Catan-test-master\IntegrationTest1.1\IntegrationTest1.1\obj\Debug\IntegrationTest1.1.pdb
